@@ -42,6 +42,7 @@ class Teacher(models.Model):
 
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
     subject = models.CharField(max_length=1, choices=SUBJECTS)
+    grades = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.user.username
