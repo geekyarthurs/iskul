@@ -29,10 +29,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin', 'django.contrib.auth',
-    'django.contrib.contenttypes', 'django.contrib.sessions',
-    'django.contrib.messages', 'django.contrib.staticfiles', 'accounts',
-    'crispy_forms'
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'crispy_forms',
+    'classroom',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -114,9 +119,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Custom user model
 AUTH_USER_MODEL = 'accounts.MyUser'
 
 #Crispy Forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+#login url
+LOGIN_URL = "accounts:login"
+
+#MEDIA FILES
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+MEDIA_URL = '/media/'

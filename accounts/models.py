@@ -27,7 +27,7 @@ class Student(models.Model):
 
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
     roll_no = models.PositiveIntegerField()
-    grades = models.PositiveIntegerField()  # class
+    grades = models.ForeignKey(to='classroom.Grade', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
@@ -35,14 +35,10 @@ class Student(models.Model):
 
 class Teacher(models.Model):
 
-    SUBJECTS = (
-        ("M", "MATH"),
-        ("S", "SCIENCE"),
-    )
-
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
-    subject = models.CharField(max_length=1, choices=SUBJECTS)
-    grades = models.PositiveIntegerField(default=0)
+    subject = models.ForeignKey(to='classroom.Subject',
+                                on_delete=models.CASCADE)
+    grades = models.ForeignKey(to='classroom.Grade', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
