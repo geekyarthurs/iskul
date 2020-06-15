@@ -14,6 +14,14 @@ class MyUser(AbstractUser):
     def __str__(self):
         return self.username
 
+    @property
+    def is_student(self):
+        return hasattr(self, 'student')
+
+    @property
+    def is_teacher(self):
+        return hasattr(self, 'teacher')
+
 
 class Student(models.Model):
 

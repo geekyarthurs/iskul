@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django import views
 from . import forms
 from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
+
+from django.shortcuts import redirect
 
 
 class StudentRegister(views.View):
@@ -64,3 +67,40 @@ class TeacherRegister(views.View):
         else:
             context = {'base': baseForm, 'student_form': teacherForm}
             return render(request, self.template_name, context)
+
+
+class LoginView(views.View):
+
+    template_name = "accounts/login.html"
+
+    def get(self, request):
+        loginForm = forms.LoginForm()
+
+        context = {'form': loginForm}
+
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        loginForm = forms.LoginForm(request.POST)
+
+        if loginForm.is_valid():
+
+            username = loginForm.cleaned_data['username']
+            password = loginForm.cleaned_data['password']
+            print(username)
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return HttpResponse("logged in!")
+            else:
+                loginForm.add_error(password, "Invalid Username or password")
+
+                context = {'form': loginForm}
+                return render(request, self.template_name, context)
+
+
+def signout(request):
+    logout(request)
+    return redirect('accounts:login')

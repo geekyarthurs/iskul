@@ -5,4 +5,27 @@
 
 
 {% block body_block %}
+
+
+{% load crispy_forms_tags %}
+
+<div class="row">
+    <div class="col-md-3 mx-auto">
+        <div class="card">
+            <div class="card-body">
+
+                <h3 class="card-title">Login</h3>
+                <hr>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input type="submit" value="Submit!" class="btn btn-primary btn-block">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 {% endblock body_block %}

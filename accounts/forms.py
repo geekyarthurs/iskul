@@ -36,3 +36,8 @@ class StudentCreationForm(forms.ModelForm):
     class Meta:
         model = models.Student
         fields = ['grades', 'roll_no']
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
