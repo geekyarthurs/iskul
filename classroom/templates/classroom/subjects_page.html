@@ -16,7 +16,7 @@
 
                 {% for subject  in subjects %}
 
-                <li class="list-group-item">{{subject.course_name}}</li>
+                <li class="list-group-item"><a href= "{% url 'classroom:content_page_no' subject=subject.pk %}">{{subject.course_name}}</a></li>
 
                 {% endfor %}
 

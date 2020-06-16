@@ -14,7 +14,12 @@
             <ul class="list-group">
 
                 {% for chapter in chapters %}
-                <li class="list-group-item">{{chapter.chapter_title}}</li>
+                <li class="list-group-item"> <a class="btn btn-block {% if chapter.pk == chapter_id %}btn-primary{% endif %}"
+                        href={% url 'classroom:content_page_yes'  subject=subject_id chapter=chapter.pk %}>{{chapter.chapter_title}}</a>
+                </li>
+
+                
+
                 {% endfor %}
             </ul>
         </div>
@@ -22,14 +27,49 @@
         <div class="col p-5 overflow-auto">
 
 
-            <h1>Cras Just Adio</h1>
+            <h1>{{chapter_name}}</h1>
             <hr>
 
 
-            {% for content in contents %}{% endfor %}
+            {% for content in contents %}
             <div class="card">
-                <div class="card-body"></div>
+                <div class="card-body">
+
+                    {% if content.content == "1" %}
+
+
+                    <p class="lead">
+
+                        {{content.content_paragraph}}
+
+                    </p>
+
+
+                    {% elif  content.content == "3" %}
+
+
+
+                    <img src="{{content.content_image.url}}" class="img-fluid" width=700>
+                    12
+
+
+                    {% else %}
+
+
+                    <video width="700" height="700" controls>
+                        <source src="{{content.content_video.url}}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+
+
+
+                    {% endif %}
+
+                </div>
             </div>
+            {%empty%}
+            <h1 class = "m-5 p-5">Please select a chapter or your teacher hasn't updated any content here yet.</h1>
+            {% endfor %}
 
 
 

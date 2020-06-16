@@ -39,11 +39,19 @@ class ContentPage(LoginRequiredMixin, UserPassesTestMixin, views.View):
         print(chapters)
 
         if chapter == None:
-            content = Chapter.objects.all().first().content_set.all()
+            content = []
+            chapter_name = ""
         else:
             content = Chapter.objects.get(pk=chapter).content_set.all()
+            chapter_name = Chapter.objects.get(pk=chapter).chapter_title
 
-        context = {'chapters': chapters, 'contents': content}
+        context = {
+            'chapters': chapters,
+            'contents': content,
+            'subject_id': subject,
+            'chapter_id': chapter,
+            'chapter_name': chapter_name
+        }
         # content =
 
         return render(request, self.template_url, context)
