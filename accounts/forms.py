@@ -25,8 +25,6 @@ class UserCreationForm(forms.ModelForm):
 
 
 class TeacherCreationForm(forms.ModelForm):
-    grades = forms.IntegerField(label="Class")
-
     class Meta:
         model = models.Teacher
         fields = ['subject', 'grades']

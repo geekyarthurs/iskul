@@ -9,16 +9,31 @@
 
 
         <div class="col-md-3 sticky-top sidebar p-3">
-            <h3>Chapters</h3>
+            <h3>Chapters {% if user.is_teacher and user.teacher.subject.pk == subject_id  %}<a
+                    href="{% url 'classroom:chapter_create' %}" class="btn float-right"><i
+                        class="fas fa-3x fa-plus-square"></i></a>{% endif %} </h3>
             <hr>
             <ul class="list-group">
 
+
+
+
+
+
+
                 {% for chapter in chapters %}
-                <li class="list-group-item"> <a class="btn btn-block {% if chapter.pk == chapter_id %}btn-primary{% endif %}"
-                        href={% url 'classroom:content_page_yes'  subject=subject_id chapter=chapter.pk %}>{{chapter.chapter_title}}</a>
+                <li class="list-group-item"> <a class="btn {% if chapter.pk == chapter_id %}btn-primary{% endif %}"
+                        href={% url 'classroom:content_page_yes'  subject=subject_id chapter=chapter.pk %}>{{chapter.chapter_number}}. {{chapter.chapter_title}}
+                    </a>
+
+
+                    {% if user.is_teacher and user.teacher.subject.pk == subject_id  %}
+                    <a href = "{% url 'classroom:chapter_delete' chapter_id=chapter.pk %}"><i class="fas fa-2x text-danger fa-trash float-right"></i></a>
+                    {% endif %}
+
                 </li>
 
-                
+
 
                 {% endfor %}
             </ul>
@@ -27,12 +42,12 @@
         <div class="col p-5 overflow-auto">
 
 
-            <h1>{{chapter_name}}</h1>
+            <h1> {{chapter_name}}   <a href="{% url 'classroom:content_create' %}" class="btn btn-primary float-right">Add Content</a> </h1>
             <hr>
 
 
             {% for content in contents %}
-            <div class="card">
+            <div class="card my-5">
                 <div class="card-body">
 
                     {% if content.content == "1" %}
@@ -68,7 +83,7 @@
                 </div>
             </div>
             {%empty%}
-            <h1 class = "m-5 p-5">Please select a chapter or your teacher hasn't updated any content here yet.</h1>
+            <h1 class="m-5 p-5">Please select a chapter or your teacher hasn't updated any content here yet.</h1>
             {% endfor %}
 
 
