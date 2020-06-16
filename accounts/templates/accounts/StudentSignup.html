@@ -1,10 +1,12 @@
-{% extends 'accounts/base.html' %}
+{% extends '../base.html' %}
+{% load static %}
 
-{% block body_block %}
+	
+  {% block content %}
 
 {% load crispy_forms_tags %}
 
-
+<br><br><br><br><br><br>
 <div class="row">
 
 
@@ -16,7 +18,7 @@
 
             <div class="card-body">
 
-            <h3 class="card-title">Signup</h3>
+            <h3 class="card-title text-center">Signup Student</h3>
             <hr>
 
                 <form action="" method="post">
@@ -36,5 +38,5 @@
 
 
 </div>
-
-{% endblock body_block %}
+<br><br><br><br>
+{% endblock content %}

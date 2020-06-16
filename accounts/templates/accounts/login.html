@@ -1,15 +1,13 @@
-{% extends 'accounts/base.html' %}
+{% extends '../base.html' %}
+{% load static %}
 
-
-
-
-
-{% block body_block %}
+	
+  {% block content %}
 
 
 {% load crispy_forms_tags %}
-
-<div class="row">
+<br><br><br><br><br>
+<div class="row text-center align-items-center">
     <div class="col-md-3 mx-auto">
         <div class="card">
             <div class="card-body">
@@ -25,7 +23,6 @@
         </div>
     </div>
 </div>
+<br><br><br>
+  {% endblock content %}
 
-
-
-{% endblock body_block %}

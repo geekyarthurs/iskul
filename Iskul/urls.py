@@ -21,5 +21,10 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
+    path('', include('home.urls'), name="home"),
     path('classroom/', include('classroom.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+admin.site.site_title = "ISKUL - Administrator"
+admin.site.site_header = "ISKUL - Administrator"
