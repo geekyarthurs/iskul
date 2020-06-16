@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-
+from django.shortcuts import reverse
 User = get_user_model()
 
 
@@ -20,6 +20,9 @@ class Subject(models.Model):
     def __str__(self):
         return self.course_name + " " + str(self.class_name)
 
+    def get_absolute_url(self):
+        return reverse("classroom:dashboard")
+
 
 class Chapter(models.Model):
     course_name = models.ForeignKey(Subject, on_delete=models.CASCADE)
@@ -28,6 +31,9 @@ class Chapter(models.Model):
 
     def __str__(self):
         return str(self.chapter_number) + ". " + self.chapter_title
+
+    def get_absolute_url(self):
+        return reverse("classroom:dashboard")
 
 
 class Content(models.Model):
@@ -53,3 +59,6 @@ class Content(models.Model):
 
     def __str__(self):
         return str(self.topic)
+
+    def get_absolute_url(self):
+        return reverse("classroom:dashboard")

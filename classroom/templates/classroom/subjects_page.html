@@ -9,14 +9,16 @@
 
 
         <div class="col-md-3 sticky-top sidebar p-3">
-            <h3>Subjects</h3>
+            <h3>Subjects 
+           
+            </h3> 
             <hr>
             <ul class="list-group my-5">
 
 
                 {% for subject  in subjects %}
 
-                <li class="list-group-item">{{subject.course_name}}</li>
+                <li class="list-group-item"><a href= "{% url 'classroom:content_page_no' subject=subject.pk %}">{{subject.course_name}}</a></li>
 
                 {% endfor %}
 

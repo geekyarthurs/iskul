@@ -27,7 +27,7 @@ class StudentRegister(views.View):
         if baseForm.is_valid() and studentForm.is_valid():
             user = baseForm.save()
             user.set_password(user.password)
-            user.is_active = False
+            # user.is_active = False
             user.save()
             student = studentForm.save(commit=False)
             student.user = user
@@ -59,7 +59,7 @@ class TeacherRegister(views.View):
         if baseForm.is_valid() and teacherForm.is_valid():
             user = baseForm.save()
             user.set_password(user.password)
-            user.is_active = False
+            # user.is_active = False
             user.save()
             teacher = teacherForm.save(commit=False)
             teacher.user = user
@@ -94,13 +94,14 @@ class LoginView(views.View):
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
+                print(" user found")
                 login(request, user)
-                return HttpResponse("logged in!")
+                return redirect('classroom:dashboard')
             else:
-                loginForm.add_error(password, "Invalid Username or password")
-
+                # loginForm.add_error(password, "Invalid Username or password")
+                print("invalid username or password")
                 context = {'form': loginForm}
-                return render(request, self.template_name, context)
+        return render(request, self.template_name, context)
 
 
 def signout(request):
