@@ -8,6 +8,8 @@ from .models import Grade, Content, Subject, Chapter
 from django.contrib.auth import get_user_model
 from accounts.models import Student
 
+from django.core.paginator import Paginator
+
 
 class Dashboard(LoginRequiredMixin, UserPassesTestMixin, views.View):
 
@@ -38,21 +40,27 @@ class ContentPage(LoginRequiredMixin, UserPassesTestMixin, views.View):
         login_url = "accounts:login"
         return (self.request.user.is_student or self.request.user.is_teacher)
 
-    def get(self, request, subject, chapter=None):
+    def get(self, request, subject, chapter=None, page=1):
 
         chapters = Subject.objects.get(
             pk=subject).chapter_set.order_by('chapter_number')
 
-        print(chapters)
+        # print(chapters)
 
         if chapter == None:
             content = []
             chapter_name = ""
         else:
             content = Chapter.objects.get(pk=chapter).content_set.all()
+
             chapter_name = Chapter.objects.get(pk=chapter).chapter_title
 
+        p = Paginator(content, 5).page(page)
+
+        content = p.object_list
+
         context = {
+            'page': p,
             'chapters': chapters,
             'contents': content,
             'subject_id': subject,
