@@ -1,0 +1,43 @@
+{% extends 'classroom/base.html' %}
+
+
+
+{% block body_block %}
+
+<div class="card-body">
+    <div class="row">
+
+
+        <div class="col-md-3 sticky-top sidebar p-3">
+            <h3>Chapters</h3>
+            <hr>
+            <ul class="list-group">
+
+                {% for chapter in chapters %}
+                <li class="list-group-item">{{chapter.chapter_title}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col p-5 overflow-auto">
+
+
+            <h1>Cras Just Adio</h1>
+            <hr>
+
+
+            {% for content in contents %}{% endfor %}
+            <div class="card">
+                <div class="card-body"></div>
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock body_block %}
