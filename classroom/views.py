@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django import views
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # Create your views here.
 from django.shortcuts import resolve_url, redirect
 from .models import Grade, Content, Subject, Chapter
+from django.contrib.auth import get_user_model
+from accounts.models import Student
 
 
 class Dashboard(LoginRequiredMixin, UserPassesTestMixin, views.View):
@@ -88,3 +90,67 @@ class ContentCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
     model = Content
     fields = '__all__'
+
+
+class StudentManage(LoginRequiredMixin, UserPassesTestMixin, views.View):
+    def test_func(self):
+        login_url = "accounts:login"
+        return (self.request.user.is_teacher)
+
+    def get(self, request):
+
+        students = request.user.teacher.grades.student_set.order_by('roll_no')
+        context = {"students": students}
+        return render(request, "classroom/manage_students.html", context)
+
+
+class DeleteUser(LoginRequiredMixin, UserPassesTestMixin, views.View):
+    def test_func(self):
+        login_url = "accounts:login"
+        return (self.request.user.is_teacher)
+
+    def get(self, request, user_id):
+        User = get_user_model()
+        User.objects.get(pk=user_id).delete()
+        return redirect('classroom:student_manage')
+
+
+class ToggleActive(LoginRequiredMixin, UserPassesTestMixin, views.View):
+    def test_func(self):
+        login_url = "accounts:login"
+        return (self.request.user.is_teacher)
+
+    def get(self, request, user_id):
+        User = get_user_model()
+        user = User.objects.get(pk=user_id)
+        user.is_active = not user.is_active
+        user.save()
+        return redirect('classroom:student_manage')
+
+
+class UpdateStudent(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    def test_func(self):
+        login_url = "accounts:login"
+        return (self.request.user.is_teacher)
+
+    model = Student
+
+    fields = ('roll_no', 'grades')
+
+
+class UpdateUser(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    def test_func(self):
+        login_url = "accounts:login"
+        return (self.request.user.is_teacher or self.request.user.is_student)
+
+    model = get_user_model()
+
+    fields = (
+        'username',
+        'first_name',
+        'last_name',
+        'email',
+        'gender',
+        'mobile_number',
+        'location',
+    )

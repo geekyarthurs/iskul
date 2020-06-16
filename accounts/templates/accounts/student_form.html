@@ -1,0 +1,37 @@
+{% extends 'classroom/base.html' %}
+
+
+{% block body_block %}
+
+{% load crispy_forms_tags %}
+
+<div class="row">
+
+
+<div class="col-3 mx-auto mt-5">
+
+
+<div class="card card-body">
+
+<h3>Update Student</h3>
+
+<hr>
+<form action="" method="post">
+{% csrf_token %}
+{{form|crispy}}
+
+<input type="submit" value="Submit" class  = "btn btn-primary btn-block">
+
+</form>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+
+{% endblock body_block %}

@@ -21,7 +21,8 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = models.MyUser
-        fields = ('username', 'password')
+        fields = ('first_name', 'last_name', 'username', 'password', 'gender',
+                  'mobile_number', 'location')
 
 
 class TeacherCreationForm(forms.ModelForm):
@@ -31,7 +32,7 @@ class TeacherCreationForm(forms.ModelForm):
 
 
 class StudentCreationForm(forms.ModelForm):
-    grades = forms.IntegerField(label="Class")
+    # grades = forms.IntegerField(label="Class")
 
     class Meta:
         model = models.Student

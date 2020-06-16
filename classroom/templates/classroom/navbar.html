@@ -11,7 +11,7 @@
 
       {% if user.is_teacher %}
       <li class="nav-item">
-        <a class="nav-link" href="#">Student Management</a>
+        <a class="nav-link" href="{% url 'classroom:student_manage' %}">Student Management</a>
       </li>
       {% endif %}
       
@@ -20,7 +20,7 @@
     <ul class="navbar-nav">
 
     <li class="nav-item">
-        <a class="nav-link" href="#">{{user.username}}</a>
+        <a class="nav-link" href="{% url 'classroom:update_user' pk=user.pk%}">{{user.username}}</a>
       </li>
     
     <li class="nav-item">

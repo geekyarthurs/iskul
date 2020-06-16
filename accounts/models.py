@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 
+from django.shortcuts import reverse
+
 
 # Create your models here.
 class MyUser(AbstractUser):
@@ -28,6 +30,9 @@ class Student(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
     roll_no = models.PositiveIntegerField()
     grades = models.ForeignKey(to='classroom.Grade', on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse("classroom:student_manage")
 
     def __str__(self):
         return self.user.username

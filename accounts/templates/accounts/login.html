@@ -21,6 +21,10 @@
                     {{ form|crispy }}
                     <input type="submit" value="Submit!" class="btn btn-primary btn-block">
                 </form>
+                <hr>
+                <a href="{% url 'accounts:student_register' %}">New here? Register</a>
+                <hr>
+                <a href="{% url 'accounts:teacher_register' %}">Are you new teacher?</a>
             </div>
         </div>
     </div>

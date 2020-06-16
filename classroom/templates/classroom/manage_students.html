@@ -2,6 +2,51 @@
 
 {% block body_block %}
 
-<h1>ok done</h1>
+
+
+<div class="card mx-5">
+
+    <div class="card-body">
+
+
+        <h3 class="card-title">Manage Students</h3>
+
+        <hr>
+
+        <ul class="list-group">
+
+            {% for std in students %}
+            <li class="list-group-item"> {{std.roll_no}}.  {{std.user.username}}
+
+
+
+
+                <a href="{% url 'classroom:user_delete' user_id=std.user.pk %}" class="btn mx-3 float-right btn-danger">Delete</a>
+                <a href="{% url 'classroom:user_toggle' user_id=std.user.pk %}" class="btn mx-3 float-right btn-warning">
+
+                    {% if std.user.is_active %}
+                    Deactive
+
+                    {% else %}
+
+                    Active
+                    {% endif %}
+
+
+
+                </a>
+                <a href="{% url 'classroom:update_student' pk=std.pk%} " class="btn mx-3 float-right btn-primary">Update</a>
+
+
+
+            </li>
+            {% endfor %}
+
+        </ul>
+
+
+    </div>
+
+</div>
 
 {% endblock body_block %}

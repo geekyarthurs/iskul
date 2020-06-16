@@ -27,7 +27,7 @@ class StudentRegister(views.View):
         if baseForm.is_valid() and studentForm.is_valid():
             user = baseForm.save()
             user.set_password(user.password)
-            # user.is_active = False
+            user.is_active = False
             user.save()
             student = studentForm.save(commit=False)
             student.user = user
@@ -59,7 +59,7 @@ class TeacherRegister(views.View):
         if baseForm.is_valid() and teacherForm.is_valid():
             user = baseForm.save()
             user.set_password(user.password)
-            # user.is_active = False
+            user.is_active = False
             user.save()
             teacher = teacherForm.save(commit=False)
             teacher.user = user
