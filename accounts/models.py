@@ -9,7 +9,12 @@ from django.shortcuts import reverse
 # Create your models here.
 class MyUser(AbstractUser):
 
-    gender = models.BooleanField(null=True, blank=True)
+    GENDER = (
+        ("M", "Male"),
+        ("F", "Female"),
+    )
+
+    gender = models.CharField(max_length=1, choices=GENDER, default="M")
     mobile_number = models.CharField(max_length=10, unique=True, null=True)
     location = models.CharField(max_length=100, null=True)
 

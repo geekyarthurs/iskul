@@ -42,7 +42,7 @@
         <div class="col p-5 overflow-auto">
 
 
-            <h1> {{chapter_name}}   <a href="{% url 'classroom:content_create' %}" class="btn btn-primary float-right">Add Content</a> </h1>
+            <h1> {{chapter_name}}  {% if user.is_teacher and user.teacher.subject.pk == subject_id  %} <a href="{% url 'classroom:content_create' %}" class="btn btn-primary float-right">Add Content</a> {% endif %}</h1>
             <hr>
 
 
