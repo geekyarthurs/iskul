@@ -88,3 +88,4 @@ class ContentCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
     model = Content
     fields = '__all__'
+
