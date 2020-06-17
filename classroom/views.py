@@ -9,6 +9,7 @@ from django.contrib.auth import get_user_model
 from accounts.models import Student
 
 from django.core.paginator import Paginator
+from .forms import ContentCreateForm
 
 
 class Dashboard(LoginRequiredMixin, UserPassesTestMixin, views.View):
@@ -78,7 +79,7 @@ class ChapterCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         return (self.request.user.is_teacher)
 
     model = Chapter
-    fields = '__all__'
+    fields = ('chapter_title', 'course_name', 'chapter_number')
 
 
 class DeleteChapter(LoginRequiredMixin, UserPassesTestMixin, views.View):
@@ -91,13 +92,38 @@ class DeleteChapter(LoginRequiredMixin, UserPassesTestMixin, views.View):
         return redirect('classroom:dashboard')
 
 
-class ContentCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+# class ContentCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+#     def test_func(self):
+#         login_url = "accounts:login"
+#         return (self.request.user.is_teacher)
+
+#     model = Content
+#     fields = '__all__'
+
+
+class ContentCreate(LoginRequiredMixin, UserPassesTestMixin, views.View):
     def test_func(self):
         login_url = "accounts:login"
         return (self.request.user.is_teacher)
 
-    model = Content
-    fields = '__all__'
+    def get(self, request, course_id, chapter_id):
+        self.course_id = course_id
+        self.chapter_id = chapter_id
+        form = ContentCreateForm()
+        return render(request, "classroom/content_create.html", {'form': form})
+
+    def post(self, request, course_id, chapter_id):
+        form = ContentCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            content = form.save(commit=False)
+            content.course_name_id = chapter_id
+            content.uploaded_by = request.user
+            content.save()
+        else:
+            return render(request, "classroom/content_create.html", {'form': form})
+
+
+        return redirect('classroom:dashboard')
 
 
 class StudentManage(LoginRequiredMixin, UserPassesTestMixin, views.View):

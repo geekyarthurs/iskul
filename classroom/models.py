@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
+from django.utils.text import slugify
+from django.db.models.signals import pre_save
+import uuid
 User = get_user_model()
 
 
@@ -13,9 +16,11 @@ class Grade(models.Model):
 
 
 class Subject(models.Model):
+
     class_name = models.ForeignKey(Grade, on_delete=models.CASCADE)
     course_name = models.CharField(max_length=10)
     course_desc = models.TextField()
+    slug = models.SlugField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return self.course_name + " " + str(self.class_name)
@@ -28,6 +33,7 @@ class Chapter(models.Model):
     course_name = models.ForeignKey(Subject, on_delete=models.CASCADE)
     chapter_title = models.CharField(max_length=100)
     chapter_number = models.PositiveIntegerField()
+    slug = models.SlugField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return str(self.chapter_number) + ". " + self.chapter_title
@@ -62,3 +68,13 @@ class Content(models.Model):
 
     def get_absolute_url(self):
         return reverse("classroom:dashboard")
+
+
+def pre_save_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        slug = slugify(instance.chapter_title + str(uuid.uuid1()))
+        instance.slug = slug
+
+
+pre_save.connect(pre_save_receiver, sender=Chapter)
+pre_save.connect(pre_save_receiver, sender=Subject)

@@ -20,7 +20,7 @@ urlpatterns = [
     path('chapter_delete/<int:chapter_id>/',
          views.DeleteChapter.as_view(),
          name='chapter_delete'),
-    path('content_create/',
+    path('content_create/course/<int:course_id>/chapter/<int:chapter_id>/',
          views.ContentCreate.as_view(),
          name='content_create'),
     path('manage_student/',
