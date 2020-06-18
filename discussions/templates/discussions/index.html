@@ -1,0 +1,48 @@
+{% extends 'classroom/base.html' %}
+
+{% block body_block %}
+
+<div class="row">
+
+
+    <div class="col-8 mx-auto">
+
+        {% for question in questions %}
+
+
+        <div class="card card-body my-5">
+
+
+
+
+            <h3 class="card-title">
+                {{question.question_title}}
+
+                <span class="float-right">{{question.subject.course_name}}</span>
+
+
+            </h3>
+
+            <hr>
+
+            <pre>{{question.question_content}}</pre>
+
+            <hr>
+
+            <div>
+
+                Asked By : {{question.posted_by.username}} - {{question.posted_at}}
+
+                <div class="float-right"> <a href="{% url 'discussions:question' pk=question.pk %}" class="btn btn-primary">Discuss</a> </div>
+            </div>
+           
+
+        </div>
+
+         {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock body_block %}

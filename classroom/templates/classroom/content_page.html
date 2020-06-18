@@ -45,7 +45,8 @@
 
 
             <h1> {{chapter_name}} {% if user.is_teacher and user.teacher.subject.pk == subject_id and chapter_id %} <a
-                    href="{% url 'classroom:content_create' course_id=subject_id chapter_id=chapter_id %}" class="btn btn-primary float-right">Add Content</a>
+                    href="{% url 'classroom:content_create' course_id=subject_id chapter_id=chapter_id %}"
+                    class="btn btn-primary float-right">Add Content</a>
                 {% endif %}</h1>
             <hr>
 
@@ -54,16 +55,18 @@
             <div class="card my-3">
                 <div class="card-body">
 
-                    <h3 class="card-title">{{content.topic}}</h3>
+                    <h3 class="card-title">{{content.topic}}
+                        
+                    </h3>
 
                     {% if content.content == "1" %}
 
 
-                    <p class="lead">
+                    <pre>
 
                         {{content.content_paragraph}}
 
-                    </p>
+                    </pre>
 
 
                     {% elif  content.content == "3" %}

@@ -120,8 +120,8 @@ class ContentCreate(LoginRequiredMixin, UserPassesTestMixin, views.View):
             content.uploaded_by = request.user
             content.save()
         else:
-            return render(request, "classroom/content_create.html", {'form': form})
-
+            return render(request, "classroom/content_create.html",
+                          {'form': form})
 
         return redirect('classroom:dashboard')
 
