@@ -4,6 +4,18 @@
 
 <div class="row">
 
+    <div class="container ">
+
+
+        <form class="form-inline my-2 my-lg-0 float-right" method="GET">
+            <input class="form-control mr-sm-2" type="search" name="search_query" placeholder="Search"
+                aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
+
+    </div>
+
 
     <div class="col-8 mx-auto">
 
@@ -33,16 +45,26 @@
 
                 Asked By : {{question.posted_by.username}} - {{question.posted_at}}
 
-                <div class="float-right"> <a href="{% url 'discussions:question' pk=question.pk %}" class="btn btn-primary">Discuss</a> </div>
+                <div class="float-right"> <a href="{% url 'discussions:question' pk=question.pk %}"
+                        class="btn btn-primary">Discuss</a> </div>
             </div>
-           
+
 
         </div>
 
-         {% endfor %}
+        {% endfor %}
+        <nav aria-label="Page navigation example" class="mx-auto">
+            <ul class="pagination">
+                <li class="page-item {% if not page.has_previous %}disabled{% endif %}"><a class="page-link" href="?page={{page.number|add:"-1"}}">Previous</a></li>
+                <li class="page-item {% if not page.has_next %}disabled{% endif %}"><a class="page-link" href="?page={{page.number|add:"1"}}">Next</a></li>
+            </ul>
+        </nav>
 
     </div>
 
+
 </div>
+
+
 
 {% endblock body_block %}

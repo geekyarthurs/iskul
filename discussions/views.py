@@ -4,30 +4,47 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Question, Subject
 from django.shortcuts import redirect
 from . import forms
+from django.core.paginator import Paginator
 
 
 class Home(LoginRequiredMixin, views.View):
     def get(self, request):
+
+        search_query = request.GET.get("search_query", "")
         if request.user.is_student:
-            user_subjects = [
-                i.pk for i in request.user.student.grades.subject_set.all()
-            ]
+            # user_subjects = [
+            #     i.pk for i in request.user.student.grades.subject_set.all()
+            # ]
+            user_subjects = request.user.student.grades.subject_set.values_list(
+                'id', flat=True)
+
         elif request.user.is_teacher:
-            user_subjects = [request.user.teacher.subject.pk]
+            user_subjects = [request.user.teacher.subject_id]
 
-        print(user_subjects)
+        questions = Question.objects.order_by('-posted_at').filter(
+            subject_id__in=user_subjects,
+            question_title__icontains=search_query)
 
-        questions = Question.objects.order_by('-posted_at')
+        paginator = Paginator(questions, 5)
 
-        final_questions = []
+        page = request.GET.get("page", "1")
+        page = int(page)
 
-        for question in questions:
+        page = paginator.page(page)  # requested page
 
-            if question.subject.pk in user_subjects:
-                final_questions.append(question)
+        questions = page.object_list
 
-        context = {"questions": final_questions}
+        context = {"questions": questions}
 
+        # final_questions = []
+
+        # for question in questions:
+
+        #     if question.subject.pk in user_subjects:
+        #         final_questions.append(question)
+
+        # context = {"questions": final_questions}
+        context = {"questions": questions, "page": page}
         return render(request, "discussions/index.html", context)
 
 

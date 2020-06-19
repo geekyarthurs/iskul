@@ -5,15 +5,16 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="btn btn-primary mx-3" href="{%url 'discussions:add_question'%}">Ask Question<span class="sr-only">(current)</span></a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="{%url 'classroom:dashboard'%}">Dashboard <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{%url 'discussions:home'%}">Discussion <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="btn btn-primary mx-3" href="{%url 'discussions:add_question'%}">Ask Question<span class="sr-only">(current)</span></a>
-      </li>
+      
 
 
       {% if user.is_teacher %}
