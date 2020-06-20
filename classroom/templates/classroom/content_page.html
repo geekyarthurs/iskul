@@ -61,9 +61,11 @@
 
                     {% if content.content == "1" %}
 
+                {% autoescape on %}
+                <pre>{{content.content_paragraph}}</pre>
 
-                    <pre>{{content.content_paragraph}}</pre>
-
+            {% endautoescape %}
+                    
 
                     {% elif  content.content == "3" %}
 

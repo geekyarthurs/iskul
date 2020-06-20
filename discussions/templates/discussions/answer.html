@@ -1,14 +1,24 @@
 {% extends 'classroom/base.html' %} {% block body_block %} 
 {% load crispy_forms_tags %}
-
-<h3>
+<br><br><br><br><br><br>
+<h3 class="text-center">
   {{question}}
 </h3>
 
-<hr />
+<hr/>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <form action="" method="post">
+        {% csrf_token %} {{form|crispy}}
+        <input type="submit" value="Add Answer" class="btn btn-primary" />
+      </form>
+    </div>
+  </div>
+</div>
 
-<form action="" method="post">
-  {% csrf_token %} {{form|crispy}}
-  <input type="submit" value="Add Answer" class="btn btn-primary" />
-</form>
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace( 'answer' );
+</script>
 {% endblock body_block %}

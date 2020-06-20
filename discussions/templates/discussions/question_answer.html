@@ -10,9 +10,12 @@
     </h3>
 
     <hr />
+    {% autoescape off %}
+    {{question.question_content}}
 
-    <pre>{{question.question_content}}</pre>
+    {% endautoescape %}
 
+    
     <hr />
 
     <div>

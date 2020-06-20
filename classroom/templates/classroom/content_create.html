@@ -4,14 +4,24 @@
 
 {% load crispy_forms_tags %}
 <br><br><br><br><br><br><br><br>
-<div class="col-md-8">
-<form action="" method="post" enctype="form/multipart-data">
-
-    {{form|crispy}}
-
-    {% csrf_token %}
-    <input type="submit" value="Submit" class="btn btn-primary">
-
-</form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <form action="" method="post" enctype="form/multipart-data">
+            
+                {{form|crispy}}
+            
+                {% csrf_token %}
+                <input type="submit" value="Submit" class="btn btn-primary">
+            
+            </form>
+            </div>
+    </div>
 </div>
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace( 'content_paragraph' );
+</script>
+
 {% endblock body_block %}
