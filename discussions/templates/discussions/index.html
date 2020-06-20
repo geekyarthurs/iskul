@@ -55,8 +55,19 @@
 
         </div>
 
+        {% empty %}
+
+        <div class="container">
+        
+        <h2 class = "text-center m-5">No Results Found!</h3>
+        </div>
+
         {% endfor %}
-        <nav aria-label="Page navigation example" class="mx-auto">
+
+        
+
+
+        <nav aria-label="Page navigation example" class="mx-auto my-3">
             <ul class="pagination">
                 <li class="page-item {% if not page.has_previous %}disabled{% endif %}"><a class="page-link" href="?page={{page.number|add:"-1"}}">Previous</a></li>
                 <li class="page-item {% if not page.has_next %}disabled{% endif %}"><a class="page-link" href="?page={{page.number|add:"1"}}">Next</a></li>

@@ -61,24 +61,31 @@
                 <h5>You haven't submitted any answers to this question yet.</h5>
                 <hr>
                 <form action="" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-               
-                {{form|crispy}}
-                <hr>
-                <input type="submit" value="Submit Answer" class = "btn btn-primary">
+                    {% csrf_token %}
+
+                    {{form|crispy}}
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Danger!</strong> {{form.errors}}
+                    </div>
+                    {% endif %}
+                    <hr>
+                    <input type="submit" value="Submit Answer" class="btn btn-primary">
                 </form>
-                
 
 
-                
-                
+
+
+
                 {% else %}
                 <p>
-                    Status : {% if submission.checked %} {{submission.received_grade}} 
+                    Status : {% if submission.checked %} {{submission.received_grade}}
                     {% else %} Not Checked
                     {% endif %} <br>
 
-                <a class="my-3 btn btn-primary float-right" href="{% url 'assignment:delete_submission' submission_id=submission.pk %}" class="btn btn-primary float-right m-3">Delete Submission</a>
+                    <a class="my-3 btn btn-primary float-right"
+                        href="{% url 'assignment:delete_submission' submission_id=submission.pk %}"
+                        class="btn btn-primary float-right m-3">Delete Submission</a>
 
 
                 </p>

@@ -69,7 +69,7 @@ class AssignmentViewStudent(LoginRequiredMixin, UserPassesTestMixin,
             "form": form,
         }
         print(form.errors)
-        return render("assignment/student_assignment.html", context)
+        return render(request, "assignment/student_assignment.html", context)
 
 
 @login_required

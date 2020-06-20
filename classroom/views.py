@@ -190,7 +190,9 @@ class UpdateStudent(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class UpdateUser(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
-        user_id = int(self.request.path[-1])
+
+        user_id = int(self.request.path.split
+        ("/")[-1])
         login_url = "accounts:login"
         return (self.request.user.pk == user_id)
 
