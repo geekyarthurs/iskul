@@ -15,7 +15,7 @@ class Home(LoginRequiredMixin, UserPassesTestMixin, views.View):
         if request.user.is_student:
             user_grade = request.user.student.grades
         else:
-            user_grade = request.user.teacher.grade
+            user_grade = request.user.teacher.grades
         assignments = Assignment.objects.filter(
             given_by__grades=user_grade).prefetch_related('given_by').order_by(
                 'given_at')
