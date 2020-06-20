@@ -23,5 +23,9 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('classroom/', include('classroom.urls')),
     path('discussion/', include('discussions.urls')),
-    path('admission/', include('admission.urls'))
+    path('admission/', include('admission.urls')),
+    path('home/', include('home.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+admin.site.site_title = "ISKUL - Administrator"
+admin.site.site_header = "ISKUL - Administrator"

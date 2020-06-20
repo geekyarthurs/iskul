@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'classroom',
     'accounts',
     'discussions',
+    'home',
 ]
 
 MIDDLEWARE = [
