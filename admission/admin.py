@@ -3,4 +3,7 @@ from .models import Admission
 # Register your models here.
 
 
-admin.site.register(Admission)
+class admissionModel(admin.ModelAdmin):
+    list_display = ('student_name', 'class_name','student_address','student_contact','date_of_admission', )
+
+admin.site.register(Admission, admissionModel)
