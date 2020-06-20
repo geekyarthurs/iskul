@@ -46,7 +46,7 @@
 
             <div>
 
-                Asked By : {{question.posted_by.username}} - {{question.posted_at}}
+                Asked By : {{question.posted_by.first_name}} {{question.posted_by.last_name}}{% if answer.posted_by.is_student %} (Student) {% else %} (Teacher) {% endif %} - {{question.posted_at}}
 
                 <div class="float-right"> <a href="{% url 'discussions:question' pk=question.pk %}"
                         class="btn btn-primary">Discuss</a> </div>

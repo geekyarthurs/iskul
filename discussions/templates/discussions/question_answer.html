@@ -16,7 +16,7 @@
     <hr />
 
     <div>
-      Asked By : {{question.posted_by.username}} - {{question.posted_at}}
+      Asked By : {{question.posted_by.first_name}} {{question.posted_by.last_name}}{% if answer.posted_by.is_student %} (Student) {% else %} (Teacher) {% endif %} - {{question.posted_at}}
 
       <div class="float-right"></div>
     </div>
@@ -30,7 +30,7 @@
 
   <div class="card my-3">
     <div class="card-body">
-      <h5>{{answer.posted_by.first_name}}{% if answer.posted_by.is_student %} (Student) {% else %} (Teacher) {% endif %} </h5>
+      <h5>{{answer.posted_by.first_name}} {{question.posted_by.last_name}}{% if answer.posted_by.is_student %} (Student) {% else %} (Teacher) {% endif %}</h5>
       <hr />
 
       <pre>{{answer.answer}} </pre>
