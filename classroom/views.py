@@ -144,7 +144,7 @@ class StudentManage(LoginRequiredMixin, UserPassesTestMixin, views.View):
     def get(self, request):
 
         students = request.user.teacher.grades.student_set.order_by('roll_no')
-        context = {"students": students, title: "Student Management"}
+        context = {"students": students, 'title': "Student Management"}
         return render(request, "classroom/manage_students.html", context)
 
 
