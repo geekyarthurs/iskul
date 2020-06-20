@@ -24,7 +24,7 @@
 
   <h2 class="text-center mb-3">Answers</h2>
 
-  <a href="{% url 'discussions:question' pk=question.pk %}" class="btn btn-primary">Answer</a>
+  <a href="{% url 'discussions:answer' pk=question.pk %}" class="btn btn-primary">Answer</a>
 
   {% for answer in question.answer_set.all %}
 
