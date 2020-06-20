@@ -41,11 +41,6 @@ class StudentCreationForm(forms.ModelForm):
         model = models.Student
         fields = ['grades', 'roll_no']
 
-
-class LoginForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
-
     def clean(self):
         super().clean()
 
@@ -58,3 +53,8 @@ class LoginForm(forms.Form):
             user = Admission.objects.filter(promo_code=promo)
             user.registered_user = True
             return self.cleaned_data
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
