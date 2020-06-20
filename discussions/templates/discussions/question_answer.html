@@ -35,8 +35,12 @@
     <div class="card-body">
       <h5>{{answer.posted_by.first_name}} {{answer.posted_by.last_name}} {% if answer.posted_by.is_student %} (Student) {% else %} (Teacher) {% endif %} </h5>
       <hr />
-
-      <pre>{{answer.answer}} </pre>
+        {% autoescape on %}
+        
+        {{answer.answer|safe}}
+        
+        {% endautoescape %}
+      
     </div>
   </div>
 

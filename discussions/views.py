@@ -101,8 +101,8 @@ class AddQuestionView(LoginRequiredMixin, views.View):
             ]
         elif request.user.is_teacher:
             user_subjects = [
-                (request.user.teacher.subject.course_name,
-                 request.user.teacher.subject.course_pk),
+                (request.user.teacher.subject.id,
+                 request.user.teacher.subject.course_name),
             ]
 
         return render(request, "discussions/add_question.html",
