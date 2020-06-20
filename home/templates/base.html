@@ -3,6 +3,7 @@
 
 {%url 'classroom:dashboard' as classroom%}
 {% url 'accounts:login' as login_url %}
+{% url 'assignment:home' as assignment %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +46,7 @@
 								<ul class="main_nav">
 									<li class="active "><a href="/home/">Home</a></li>
 									<li class="{% if request.path == classroom %} active {%endif%}"><a href="{{classroom}}">Classroom</a></li>
-									
+			
 									{% if user.is_authenticated %}
 									<li><a>Welcome, {{user.username}}</a></li>
 									<li><a href="{% url 'accounts:signout' %}">Logout</a></li>

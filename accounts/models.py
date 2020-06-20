@@ -29,13 +29,10 @@ class MyUser(AbstractUser):
     def is_teacher(self):
         return hasattr(self, 'teacher')
 
-    def get_absolute_url(self):
-        return reverse("classroom:dashboard")
-
 
 class Student(models.Model):
 
-    user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(MyUser, on_delete=models.CASCADE) 
     roll_no = models.PositiveIntegerField()
     grades = models.ForeignKey(to='classroom.Grade', on_delete=models.CASCADE)
 
