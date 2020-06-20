@@ -29,7 +29,11 @@ class Dashboard(LoginRequiredMixin, UserPassesTestMixin, views.View):
 
         subjects = grade.subject_set.all()
 
-        context = {'grade': className, 'subjects': subjects}
+        context = {
+            'grade': className,
+            'subjects': subjects,
+            'title': 'Dashboard'
+        }
 
         return render(request, self.template_url, context)
 
@@ -66,7 +70,8 @@ class ContentPage(LoginRequiredMixin, UserPassesTestMixin, views.View):
             'contents': content,
             'subject_id': subject,
             'chapter_id': chapter,
-            'chapter_name': chapter_name
+            'chapter_name': chapter_name,
+            'title': chapter_name,
         }
         # content =
 
@@ -80,6 +85,11 @@ class ChapterCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
     model = Chapter
     fields = ('chapter_title', 'course_name', 'chapter_number')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Chapter"
+        return context
 
 
 class DeleteChapter(LoginRequiredMixin, UserPassesTestMixin, views.View):
@@ -134,7 +144,7 @@ class StudentManage(LoginRequiredMixin, UserPassesTestMixin, views.View):
     def get(self, request):
 
         students = request.user.teacher.grades.student_set.order_by('roll_no')
-        context = {"students": students}
+        context = {"students": students, title: "Student Management"}
         return render(request, "classroom/manage_students.html", context)
 
 

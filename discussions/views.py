@@ -34,8 +34,6 @@ class Home(LoginRequiredMixin, views.View):
 
         questions = page.object_list
 
-        context = {"questions": questions}
-
         # final_questions = []
 
         # for question in questions:
@@ -44,7 +42,7 @@ class Home(LoginRequiredMixin, views.View):
         #         final_questions.append(question)
 
         # context = {"questions": final_questions}
-        context = {"questions": questions, "page": page}
+        context = {"questions": questions, "page": page, 'title': "Discussion"}
         return render(request, "discussions/index.html", context)
 
 
@@ -53,7 +51,7 @@ class QuestionView(LoginRequiredMixin, views.View):
 
         question = Question.objects.get(pk=pk)
 
-        context = {"question": question}
+        context = {"question": question, 'title': "Question"}
 
         return render(request, "discussions/question_answer.html", context)
 
