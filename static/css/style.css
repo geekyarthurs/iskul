@@ -1,0 +1,7 @@
+.form-control:focus{
+    color: black !important;
+}
+
+.form-control{
+    color:black !important;
+}
