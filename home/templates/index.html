@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load static %}
+
+	
+  {% block content %}
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="home_slider_container">
+			
+			<!-- Home Slider -->
+			<div class="owl-carousel owl-theme home_slider">
+				
+				<!-- Home Slider Item -->
+				<div class="owl-item">
+					<div class="home_slider_background" style="background-image:url({% static 'images/home_slider_1.jpg' %})"></div>
+					<div class="home_slider_content">
+						<div class="container">
+							<div class="row">
+								<div class="col text-center">
+									<div class="home_slider_title">The Premium System Education</div>
+									<div class="home_slider_subtitle">Future Of Education Technology</div>
+									{% comment %} <div class="home_slider_form_container">
+										<form action="#" id="home_search_form_1" class="home_search_form d-flex flex-lg-row flex-column align-items-center justify-content-between">
+											<div class="d-flex flex-row align-items-center justify-content-start">
+												<input type="search" class="home_search_input" placeholder="Keyword Search" required="required">
+												<select class="dropdown_item_select home_search_input">
+													<option>Category Courses</option>
+													<option>Category</option>
+													<option>Category</option>
+												</select>
+												<select class="dropdown_item_select home_search_input">
+													<option>Select Price Type</option>
+													<option>Price Type</option>
+													<option>Price Type</option>
+												</select>
+											</div>
+											<button type="submit" class="home_search_button">search</button>
+										</form>
+									</div> {% endcomment %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Home Slider Item -->
+				<div class="owl-item">
+					<div class="home_slider_background" style="background-image:url({% static 'images/home_slider_1.jpg' %})"></div>
+					<div class="home_slider_content">
+						<div class="container">
+							<div class="row">
+								<div class="col text-center">
+									<div class="home_slider_title">The Premium System Education</div>
+									<div class="home_slider_subtitle">Future Of Education Technology</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Home Slider Item -->
+				<div class="owl-item">
+					<div class="home_slider_background" style="background-image:url({% static 'images/home_slider_1.jpg' %})"></div>
+					<div class="home_slider_content">
+						<div class="container">
+							<div class="row">
+								<div class="col text-center">
+									<div class="home_slider_title">The Premium System Education</div>
+									<div class="home_slider_subtitle">Future Of Education Technology</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Home Slider Nav -->
+
+		<div class="home_slider_nav home_slider_prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+		<div class="home_slider_nav home_slider_next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+	</div>
+
+	<!-- Features -->
+
+	<div class="features">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="section_title_container text-center">
+						<h2 class="section_title">Welcome To ISKUL E-Learning</h2>
+						<div class="section_subtitle"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel gravida arcu. Vestibulum feugiat, sapien ultrices fermentum congue, quam velit venenatis sem</p></div>
+					</div>
+				</div>
+			</div>
+			<div class="row features_row">
+				
+				<!-- Features Item -->
+				<div class="col-lg-3 feature_col">
+					<div class="feature text-center trans_400">
+						<div class="feature_icon"><img src="{% static 'images/icon_1.png' %}" alt=""></div>
+						<h3 class="feature_title">The Experts</h3>
+						<div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
+					</div>
+				</div>
+
+				<!-- Features Item -->
+				<div class="col-lg-3 feature_col">
+					<div class="feature text-center trans_400">
+						<div class="feature_icon"><img src="{% static 'images/icon_2.png' %}" alt=""></div>
+						<h3 class="feature_title">Book & Library</h3>
+						<div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
+					</div>
+				</div>
+
+				<!-- Features Item -->
+				<div class="col-lg-3 feature_col">
+					<div class="feature text-center trans_400">
+						<div class="feature_icon"><img src="{% static 'images/icon_3.png' %}" alt=""></div>
+						<h3 class="feature_title">Best Courses</h3>
+						<div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
+					</div>
+				</div>
+
+				<!-- Features Item -->
+				<div class="col-lg-3 feature_col">
+					<div class="feature text-center trans_400">
+						<div class="feature_icon"><img src="{% static 'images/icon_4.png' %}" alt=""></div>
+						<h3 class="feature_title">Award & Reward</h3>
+						<div class="feature_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- Counter -->
+
+	<div class="counter">
+		<div class="counter_background" style="background-image:url({% static 'images/counter_background.jpg' %})"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="counter_content">
+						<h2 class="counter_title">Register Now</h2>
+						<div class="counter_text"><p>Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dumy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p></div>
+
+						<!-- Milestones -->
+
+						<div class="milestones d-flex flex-md-row flex-column align-items-center justify-content-between">
+							
+							<!-- Milestone -->
+							<div class="milestone">
+								<div class="milestone_counter" data-end-value="{{studentCount}}">0</div>
+								<div class="milestone_text">Students</div>
+							</div>
+
+							<!-- Milestone -->
+							<div class="milestone">
+								<div class="milestone_counter" data-end-value="{{teacherCount}}" data-sign-after="">0</div>
+								<div class="milestone_text">Teachers</div>
+							</div>
+
+							<!-- Milestone -->
+							<div class="milestone">
+								<div class="milestone_counter" data-end-value="{{subjectCount}}" data-sign-after="">0</div>
+								<div class="milestone_text">Subjects</div>
+							</div>
+
+							<!-- Milestone -->
+						
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		
+
+		</div>
+	</div>
+
+	
+
+	
+  {% endblock content %}
+
+  
