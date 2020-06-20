@@ -60,8 +60,9 @@
                 {% if not submission %}
                 <h5>You haven't submitted any answers to this question yet.</h5>
                 <hr>
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+               
                 {{form|crispy}}
                 <hr>
                 <input type="submit" value="Submit Answer" class = "btn btn-primary">
@@ -77,7 +78,7 @@
                     {% else %} Not Checked
                     {% endif %} <br>
 
-                <a class="my-3" href="{% url 'assignment:delete_submission' submission_id=submission.pk %}" class="btn btn-primary float-right m-3">Delete Submission</a>
+                <a class="my-3 btn btn-primary float-right" href="{% url 'assignment:delete_submission' submission_id=submission.pk %}" class="btn btn-primary float-right m-3">Delete Submission</a>
 
 
                 </p>

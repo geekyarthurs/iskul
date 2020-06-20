@@ -49,10 +49,11 @@ class AssignmentViewStudent(LoginRequiredMixin, UserPassesTestMixin,
 
     def post(self, request, assignment_id):
 
-        answered_by = request.user
+        answered_by = request.user.student
         assignment = Assignment.objects.get(pk=assignment_id)
 
-        form = forms.AddSubmission(request.POST)
+        form = forms.AddSubmission(request.POST, request.FILES)
+        print(request.FILES)
 
         if form.is_valid():
             sub = form.save(commit=False)
@@ -60,8 +61,7 @@ class AssignmentViewStudent(LoginRequiredMixin, UserPassesTestMixin,
             sub.assignment = assignment
             sub.save()
 
-            return redirect(request,
-                            'assignment:assignment_id',
+            return redirect('assignment:student_assignment',
                             assignment_id=assignment_id)
         context = {
             "assignment": assignment,
@@ -69,7 +69,7 @@ class AssignmentViewStudent(LoginRequiredMixin, UserPassesTestMixin,
             "form": form,
         }
         print(form.errors)
-        return render(request, "assignment/student_assignment.html", context)
+        return render("assignment/student_assignment.html", context)
 
 
 @login_required
@@ -79,6 +79,5 @@ def delete_submission(request, submission_id):
     assignment_id = instance.assignment_id
     instance.assignment_file.delete()
     instance.delete()
-    return redirect(request,
-                    'assignment:assignment_id',
+    return redirect('assignment:student_assignment',
                     assignment_id=assignment_id)
