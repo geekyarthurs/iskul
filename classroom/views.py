@@ -118,12 +118,14 @@ class ContentCreate(LoginRequiredMixin, UserPassesTestMixin, views.View):
 
     def get(self, request, course_id, chapter_id):
         self.course_id = course_id
-        self.chapter_id = chapter_id
+        self.chapter_id = chapter_id  
+    
         form = ContentCreateForm()
         return render(request, "classroom/content_create.html", {'form': form})
 
     def post(self, request, course_id, chapter_id):
         form = ContentCreateForm(request.POST, request.FILES)
+        print(request.POST)
         if form.is_valid():
             content = form.save(commit=False)
             content.course_name_id = chapter_id

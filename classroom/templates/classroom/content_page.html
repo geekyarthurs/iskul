@@ -4,7 +4,7 @@
 
 {% block body_block %}
 
-<div class="card-body" style = "margin-top:100px;">
+<div class="card-body" style="margin-top:100px;">
     <div class="row">
 
 
@@ -56,13 +56,18 @@
                 <div class="card-body">
 
                     <h3 class="card-title">{{content.topic}}
-                        
+
                     </h3>
 
                     {% if content.content == "1" %}
 
+                    {% autoescape on %}
+                    {{content.content_paragraph|safe}}
 
-                    <p>{{content.content_paragraph}}</p>
+
+
+
+                    {% endautoescape %}
 
 
                     {% elif  content.content == "3" %}
@@ -76,13 +81,13 @@
                     {% else %}
 
 
-                    
+
                     <video width="700" height="700" controls>
 
                         <source src="{{content.content_video.url}}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                   
+
 
 
                     {% endif %}
