@@ -5,3 +5,8 @@
 .form-control{
     color:black !important;
 }
+
+::selection {
+    color: black !important;
+    background: #14bdee !important;
+  }
