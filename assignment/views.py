@@ -32,6 +32,8 @@ class AssignmentViewStudent(LoginRequiredMixin, UserPassesTestMixin,
 
         assignment = Assignment.objects.get(pk=assignment_id)
 
+        print(assignment.title)
+
         try:
             submission = AssignmentSubmission.objects.get(
                 answered_by=request.user.student)
@@ -40,12 +42,14 @@ class AssignmentViewStudent(LoginRequiredMixin, UserPassesTestMixin,
 
         form = forms.AddSubmission()
         context = {
-            "assignment": assignment,
+            "assignments": assignment,
             "submission": submission,
             "form": form
         }
 
-        return render(request, "assignment/student_assignment.html", context)
+        return render(request,
+                      "assignment/student_assignment.html",
+                      context=context)
 
     def post(self, request, assignment_id):
 

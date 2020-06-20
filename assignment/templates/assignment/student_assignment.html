@@ -3,7 +3,7 @@
 
 {% block body_block %}
 
-
+{{assignment.title}}
 {% load crispy_forms_tags %}
 
 <br>
@@ -30,15 +30,15 @@
 
 
 
-                <h3 class="card-title">{{assignment.title}}</h3>
+                <h3 class="card-title">{{assignments.title}}</h3>
                 <hr>
-                <p class="lead">{{assignment.description}}</p>
+                <p class="lead">{{assignments.description}}</p>
                 <hr>
                 <p>
 
-                    Submission Date : {{assignment.submission_date}} <br>
-                    Given By : {{assignment.given_by.user.first_name}} {{assignment.given_by.user.last_name}} <br>
-                    Given At : {{assignment.given_at}}
+                    Submission Date : {{assignments.submission_date}} <br>
+                    Given By : {{assignments.given_by.user.first_name}} {{assignments.given_by.user.last_name}} <br>
+                    Given At : {{assignments.given_at}}
 
 
 
@@ -46,7 +46,7 @@
 
                 <hr>
 
-                <a href="{{assignment.question_file.url}}" class="btn btn-primary">Download Question</a>
+                <a href="{{assignments.question_file.url}}" class="btn btn-primary">Download Question</a>
 
 
 
