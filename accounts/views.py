@@ -99,7 +99,9 @@ class LoginView(views.View):
                 return redirect('classroom:dashboard')
             else:
                 # loginForm.add_error(password, "Invalid Username or password")
-                print("invalid username or password")
+                loginForm.add_error("username", "")
+                loginForm.add_error("password",
+                                    "Incorrect Username or password!")
                 context = {'form': loginForm}
         return render(request, self.template_name, context)
 
