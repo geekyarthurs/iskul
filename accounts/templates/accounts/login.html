@@ -1,34 +1,33 @@
 {% extends 'accounts/base.html' %}
 
 
-
-
-
 {% block body_block %}
 
 
 {% load crispy_forms_tags %}
 
-<div class="row">
-    <div class="col-md-3 mx-auto">
-        <div class="card">
-            <div class="card-body">
-
-                <h3 class="card-title">Login</h3>
-                <hr>
-                <form action="" method="post">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    <input type="submit" value="Submit!" class="btn btn-primary btn-block">
-                </form>
-                <hr>
-                <a href="{% url 'accounts:student_register' %}">New here? Register</a>
-                <hr>
-                <a href="{% url 'accounts:teacher_register' %}">Are you new teacher?</a>
-            </div>
+<div class="container">
+    <div class="row mt-5">
+      <div class="col-md-6 m-auto">
+        <div class="card card-body">
+          <h1 class="text-center mb-3">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </h1>
+          <form action="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="Submit!" class="btn btn-primary btn-block">
+        </form>
+        <a href="{% url 'accounts:student_register' %}">New here? Register</a>
+          <p class="lead mt-4">
+            <a href="{% url 'accounts:teacher_register' %}">Are you new teacher?</a>
+          </p>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+  
+
 
 
 
