@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 
 from django.shortcuts import redirect
 
+from django.contrib import messages
+
 
 class StudentRegister(views.View):
 
@@ -32,7 +34,11 @@ class StudentRegister(views.View):
             student = studentForm.save(commit=False)
             student.user = user
             student.save()
-            return HttpResponse("form ok")
+            messages.add_message(
+                request, messages.SUCCESS,
+                "Succesfully Registered. Please Wait for your teacher to accept your request."
+            )
+            return redirect('accounts:login')
 
         else:
             context = {'base': baseForm, 'student_form': studentForm}
