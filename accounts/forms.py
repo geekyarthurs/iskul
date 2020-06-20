@@ -1,5 +1,6 @@
 from django import forms
 from . import models
+from admission.models import Admission
 
 
 class UserCreationForm(forms.ModelForm):
@@ -34,6 +35,8 @@ class TeacherCreationForm(forms.ModelForm):
 class StudentCreationForm(forms.ModelForm):
     # grades = forms.IntegerField(label="Class")
 
+    promo_code = forms.CharField()
+
     class Meta:
         model = models.Student
         fields = ['grades', 'roll_no']
@@ -42,3 +45,16 @@ class StudentCreationForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
+    def clean(self):
+        super().clean()
+
+        promo = self.cleaned_data['promo_code']
+        user = Admission.objects.get(promo_code=promo)
+
+        if not user.exists():
+            raise forms.ValidationError("Wrong Promo Code.")
+        else:
+            user = Admission.objects.filter(promo_code=promo)
+            user.registered_user = True
+            return self.cleaned_data
