@@ -30,7 +30,7 @@
 
   <div class="card my-3">
     <div class="card-body">
-      <h5>{{answer.posted_by.username}}{% if answer.posted_by.is_student %} (Student) {% else %} (Teacher) {% endif %} </h5>
+      <h5>{{answer.posted_by.first_name}}{% if answer.posted_by.is_student %} (Student) {% else %} (Teacher) {% endif %} </h5>
       <hr />
 
       <pre>{{answer.answer}} </pre>
