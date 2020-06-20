@@ -12,21 +12,25 @@
 
 
         <div class="col-md-3 sidebar p-3">
+           
+            <hr>
+            {% if user.is_authenticated %}
+            <h3> Welcome, <span style= "color:#14bdee">{{user.username}}</span></h3>
+            <hr>
+            {% endif %}
+           
             <h3>Subjects 
            
             </h3> 
-            <hr>
-            <ul class="list-group my-5">
-
-
-                {% for subject  in subjects %}
-
-                <li class="list-group-item"><a href= "{% url 'classroom:content_page_no' subject=subject.pk %}">{{subject.course_name}}</a></li>
-
-                {% endfor %}
-
-
-            </ul>
+                <table class="table table-bordered">
+                    <thead>
+                    {% for subject  in subjects %}
+                        <tr>
+                            <td><a href="{% url 'classroom:content_page_no' subject=subject.pk %}"><button class="btn btn-block">{{subject.course_name}}</button></a></td>
+                        </tr>
+                    {%endfor%}
+                </thead>
+                </table>
 
             <h3>External Contents</h3>
             <hr>
