@@ -1,0 +1,50 @@
+{% extends 'assignment/base.html' %}
+
+
+{% block body_block %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container">
+
+<h1 class = "text-center">Assignments</h1>
+
+    <div class="row">
+
+        <div class="col-md-8 mx-auto">
+
+
+        <a href="#" class="btn btn-primary">Give New Assignment</a>
+
+            {% for assignment in assignments %}
+            <div class="card card-body my-3">
+                <h3 class="card-title">{{assignment.title}}</h3>
+                <hr>
+
+                <p class="lead">
+                Given by : {{assignment.given_by.user.first_name}} {{assignment.given_by.user.last_name}} ({{assignment.given_by.subject}}) <br>
+                Submission Date : {{assignment.submission_date}}
+
+                </p>
+                <hr>
+
+                <a href="{% url 'assignment:student_assignment' assignment_id=assignment.pk %}" class="btn btn-primary">View Assignment</a>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endblock body_block %}
+

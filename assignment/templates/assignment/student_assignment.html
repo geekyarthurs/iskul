@@ -1,0 +1,82 @@
+{% extends 'assignment/base.html' %}
+
+
+{% block body_block %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<br><br>
+
+
+
+<div class="container">
+
+
+    <div class="row">
+
+        <div class="col-md-8 mx-auto">
+
+            <h2>Assignment Info</h2>
+            <hr>
+
+            <div class="card card-body mb-5">
+
+
+
+                <h3 class="card-title">{{assignment.title}}</h3>
+                <hr>
+                <p class="lead">{{assignment.description}}</p>
+                <hr>
+                <p>
+
+                    Submission Date : {{assignment.submission_date}} <br>
+                    Given By : {{assignment.given_by.user.first_name}} {{assignment.given_by.user.last_name}} <br>
+                    Given At : {{assignment.given_at}}
+
+
+
+                </p>
+
+                <hr>
+
+                <a href="#" class="btn btn-primary">Download Question</a>
+
+
+
+            </div> <!-- CARD END -->
+
+
+            <h3 class="my-3">Your Submission</h3>
+
+            <div class="card card-body">
+
+                {% if not submission %}
+                <h5>You haven't submitted any answers to this question yet.</h5>
+                {% else %}
+                <p>
+                    Status : {% if submission.checked %} {{submission.received_grade}} 
+                    {% else %} Not Checked
+                    {% endif %} <br>
+
+                    
+                </p>
+                {% endif %}
+
+
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock body_block %}
