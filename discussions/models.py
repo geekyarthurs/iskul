@@ -15,7 +15,7 @@ class Question(models.Model):
     # answered = models.BooleanField(default=False, blank=True)
     posted_at = models.DateTimeField(auto_now=True)
     posted_by = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    
     def __str__(self):
         return self.question_title
 
