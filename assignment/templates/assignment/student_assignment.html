@@ -3,6 +3,9 @@
 
 {% block body_block %}
 
+
+{% load crispy_forms_tags %}
+
 <br>
 <br>
 <br>
@@ -43,7 +46,7 @@
 
                 <hr>
 
-                <a href="#" class="btn btn-primary">Download Question</a>
+                <a href="{{assignment.question_file.url}}" class="btn btn-primary">Download Question</a>
 
 
 
@@ -56,13 +59,27 @@
 
                 {% if not submission %}
                 <h5>You haven't submitted any answers to this question yet.</h5>
+                <hr>
+                <form action="" method="post">
+                {% csrf_token %}
+                {{form|crispy}}
+                <hr>
+                <input type="submit" value="Submit Answer" class = "btn btn-primary">
+                </form>
+                
+
+
+                
+                
                 {% else %}
                 <p>
                     Status : {% if submission.checked %} {{submission.received_grade}} 
                     {% else %} Not Checked
                     {% endif %} <br>
 
-                    
+                <a class="my-3" href="{% url 'assignment:delete_submission' submission_id=submission.pk %}" class="btn btn-primary float-right m-3">Delete Submission</a>
+
+
                 </p>
                 {% endif %}
 

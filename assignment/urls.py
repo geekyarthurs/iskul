@@ -13,5 +13,10 @@ urlpatterns = [
         'student/<int:assignment_id>',
         views.AssignmentViewStudent.as_view(),
         name='student_assignment',
+    ),
+    path(
+        'delete_submission/<int:submission_id>',
+        views.delete_submission,
+        name='delete_submission',
     )
 ]
