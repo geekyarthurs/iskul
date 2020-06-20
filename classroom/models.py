@@ -46,17 +46,10 @@ class Chapter(models.Model):
 
 class Content(models.Model):
 
-    CONTENT_TYPE = (
-        ("1", "paragraph"),
-        ("2", "video"),
-        ("3", "image"),
-    )
-
     topic = models.CharField(max_length=100)
 
     course_name = models.ForeignKey(Chapter, on_delete=models.CASCADE)
 
-    content = models.CharField(max_length=2, choices=CONTENT_TYPE)
     content_image = models.ImageField(upload_to="images",
                                       blank=True,
                                       null=True)

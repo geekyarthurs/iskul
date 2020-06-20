@@ -29,6 +29,9 @@ class MyUser(AbstractUser):
     def is_teacher(self):
         return hasattr(self, 'teacher')
 
+    def get_absolute_url(self):
+        return reverse("classroom:dashboard")
+
 
 class Student(models.Model):
 

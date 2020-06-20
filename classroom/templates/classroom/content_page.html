@@ -59,18 +59,16 @@
 
                     </h3>
 
-                    {% if content.content == "1" %}
+                    {% if content.content_paragraph %}
 
                     {% autoescape on %}
                     {{content.content_paragraph|safe}}
 
 
-
-
                     {% endautoescape %}
 
 
-                    {% elif  content.content == "3" %}
+                    {% elif  content.content_image %}
 
 
 
@@ -78,7 +76,7 @@
                     12
 
 
-                    {% else %}
+                    {% elif content.content_video %}
 
 
 

@@ -70,7 +70,11 @@ class TeacherRegister(views.View):
             teacher = teacherForm.save(commit=False)
             teacher.user = user
             teacher.save()
-            return HttpResponse("form ok")
+            messages.add_message(
+                request, messages.SUCCESS,
+                "Succesfully Registered. Please Wait for superusers or IT officers to accept your request."
+            )
+            return redirect('accounts:login')
 
         else:
             context = {'base': baseForm, 'student_form': teacherForm}
