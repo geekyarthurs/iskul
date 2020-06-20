@@ -12,7 +12,7 @@ class Admit(views.View):
 
     def get(self, request):
         AdmitForm = forms.AdmissionForm()  # BASE USER
-        context = {'student_form': AdmitForm}
+        context = {'form': AdmitForm}
 
         return render(request, self.template_name, context)
 
