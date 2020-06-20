@@ -46,7 +46,7 @@
 
             <div>
 
-                Asked By : {{question.posted_by.first_name}} {{question.posted_by.last_name}}{% if answer.posted_by.is_student %} (Student) {% else %} (Teacher) {% endif %} - {{question.posted_at}}
+                Asked By : {{question.posted_by.username}} - {{question.posted_at}}
 
                 <div class="float-right"> <a href="{% url 'discussions:question' pk=question.pk %}"
                         class="btn btn-primary">Discuss</a> </div>
@@ -56,7 +56,7 @@
         </div>
 
         {% endfor %}
-        <nav aria-label="Page navigation example" class="mx-auto mb-3">
+        <nav aria-label="Page navigation example" class="mx-auto">
             <ul class="pagination">
                 <li class="page-item {% if not page.has_previous %}disabled{% endif %}"><a class="page-link" href="?page={{page.number|add:"-1"}}">Previous</a></li>
                 <li class="page-item {% if not page.has_next %}disabled{% endif %}"><a class="page-link" href="?page={{page.number|add:"1"}}">Next</a></li>
