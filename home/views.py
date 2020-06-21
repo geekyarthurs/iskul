@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from classroom.models import Grade , Subject, Chapter, Content
+from classroom.models import  Subject
 from accounts.models import Student, Teacher 
 # Create your views here.
 def home(request):

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'discussions',
     'home',
     'assignment',
+    'announcement',
+    
 ]
 
 MIDDLEWARE = [
