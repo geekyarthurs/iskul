@@ -45,13 +45,14 @@ class StudentCreationForm(forms.ModelForm):
         super().clean()
 
         promo = self.cleaned_data['promo_code']
-        user = Admission.objects.get(promo_code=promo)
+        user = Admission.objects.filter(promo_code=promo)
 
         if not user.exists():
             raise forms.ValidationError("Wrong Promo Code.")
         else:
-            user = Admission.objects.filter(promo_code=promo)
+            user = Admission.objects.get(promo_code=promo)
             user.registered_user = True
+            user.save()
             return self.cleaned_data
 
 
