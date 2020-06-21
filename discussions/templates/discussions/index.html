@@ -1,13 +1,32 @@
 {% extends 'classroom/base.html' %}
 
+{% block search %}
+
+		<!-- Header Search Panel -->
+		<div class="header_search_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="header_search_content d-flex flex-row align-items-center justify-content-end">
+							<form action="#" class="header_search_form">
+								<input type="search" class="search_input" name="search_query" placeholder="Search" required="required">
+								<button type="submit"class="header_search_button d-flex flex-column align-items-center justify-content-center">
+									<i class="fa fa-search" aria-hidden="true"></i>
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>			
+		</div>		
+{% endblock search %}
 {% block body_block %}
 
-<br><br><br><br><br><br>
-<div class="row">
+<br><br><br><br><br><br><br>
 
+<!-- 
     <div class="container ">
-
-    <a href="{% url 'discussions:add_question'%}" class="btn btn-primary btn-lg">Add Question</a>
+        <div class="row">
 
 
         <form class="form-inline my-2 my-lg-0 float-right" method="GET">
@@ -18,66 +37,63 @@
 
 
     </div>
+    </div> -->
 
 
-    <div class="col-8 mx-auto">
+<div class="container">
+<a href="{% url 'discussions:add_question'%}" class="btn btn-primary btn-lg">Add Question</a>
+    <div class="row">
 
-        {% for question in questions %}
+        
+        <div class="col-md-10 mx-auto">
+            {% for question in questions %}
+            <div class="card shadow mt-4 mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">
+                      {{question.question_title}}
+                      <span class="float-right">{{question.subject.course_name}}</span>
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <h6 class="font-weight-normal m-0">
+                    {% autoescape off %}
+                    {{question.question_content}}
 
-
-        <div class="card card-body my-5">
-
-
-
-
-            <h3 class="card-title">
-                {{question.question_title}}
-
-                <span class="float-right">{{question.subject.course_name}}</span>
-
-
-            </h3>
-
-            <hr>
-
-            <pre>{{question.question_content}}</pre>
-
-            <hr>
-
-            <div>
-
-                Asked By : {{question.posted_by.first_name}} {{question.posted_by.last_name}}  - {{question.posted_at}}
-
-                <div class="float-right"> <a href="{% url 'discussions:question' pk=question.pk %}"
-                        class="btn btn-primary">Discuss</a> </div>
+                    {% endautoescape %}
+                    </h6>
+                    <hr>
+                    <p>
+                        <strong>Asked By : {{question.posted_by.first_name}} {{question.posted_by.last_name}}  - {{question.posted_at}}</strong>
+                        <span class="float-right"><a href="{% url 'discussions:question' pk=question.pk %}"
+                            class="btn btn-primary">Discuss</a></span>
+                    </p>
+                </div>
             </div>
 
+            {% empty %}
 
+                <div class="container">
+                
+                <h2 class = "text-center m-5">No Results Found!</h3>
+                </div>
+                
+            {% endfor %}
         </div>
-
-        {% empty %}
-
-        <div class="container">
-        
-        <h2 class = "text-center m-5">No Results Found!</h3>
-        </div>
-
-        {% endfor %}
-
-        
-
-
-        <nav aria-label="Page navigation example" class="mx-auto my-3">
-            <ul class="pagination">
-                <li class="page-item {% if not page.has_previous %}disabled{% endif %}"><a class="page-link" href="?page={{page.number|add:"-1"}}">Previous</a></li>
-                <li class="page-item {% if not page.has_next %}disabled{% endif %}"><a class="page-link" href="?page={{page.number|add:"1"}}">Next</a></li>
-            </ul>
-        </nav>
 
     </div>
-
-
 </div>
+<nav aria-label="Page navigation example" class="mx-auto my-3">
+    <ul class="pagination justify-content-center">
+        <li class="page-item {% if not page.has_previous %}disabled{% endif %}"><a class="page-link" href="?page={{page.number|add:"-1"}}">Previous</a></li>
+        <li class="page-item {% if not page.has_next %}disabled{% endif %}"><a class="page-link" href="?page={{page.number|add:"1"}}">Next</a></li>
+    </ul>
+</nav>
+
+
+        
+
+
+    
 
 
 

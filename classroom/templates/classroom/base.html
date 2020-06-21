@@ -76,7 +76,7 @@
 												<a class="dropdown-item" href="{% url 'accounts:signout' %}">Logout</a>
 											</div>
 										</li>
-
+										<div class="search_button"><i class="fa fa-search" aria-hidden="true"></i></div>
 
 
 
@@ -94,7 +94,8 @@
 					</div>
 				</div>
 			</div>
-
+	{% block search %}
+	{% endblock search %}
 
 		</header>
 
