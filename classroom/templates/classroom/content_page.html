@@ -7,8 +7,9 @@
 <div class="card-body" style="margin-top:100px;">
     <div class="row">
 
-
-        <div class="col-md-3 sticky-top  p-3">
+        
+        <div class="col-md-3   p-3">
+        
             <h3>Chapters {% if user.is_teacher and user.teacher.subject.pk == subject_id  %}<a
                     href="{% url 'classroom:chapter_create' %}" class="btn float-right"><i
                         class="fas fa-2x fa-plus-square"></i></a>{% endif %} </h3>
@@ -42,6 +43,7 @@
         </div>
 
         <div class="col p-5 overflow-auto">
+            <button class="btn btn-danger" onclick="goBack()">Back</button>
 
 
             <h1> {{chapter_name}} {% if user.is_teacher and user.teacher.subject.pk == subject_id and chapter_id %} <a
@@ -49,7 +51,6 @@
                     class="btn btn-primary float-right">Add Content</a>
                 {% endif %}</h1>
             <hr>
-
 
             {% for content in contents %}
             <div class="card my-3">

@@ -148,10 +148,7 @@ h6::selection
 {
 	
 }
-.form-control
-{
-	color: #db5246;
-}
+
 section
 {
 	display: block;
@@ -415,7 +412,7 @@ section
 
 .main_nav_contaner
 {
-
+	
 }
 .main_nav,
 .search_button,
@@ -434,7 +431,7 @@ section
 }
 .main_nav li a
 {
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 500;
 	color: #384158;
 	-webkit-transition: all 200ms ease;

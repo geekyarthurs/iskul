@@ -1,0 +1,33 @@
+{% extends './base.html' %}
+
+{% block title %}
+ISKUL | Announcements
+{% endblock title %}
+
+{% block body_block %}
+
+<br><br><br><br><br><br><br>
+ 
+
+
+<div  style="color:#384158" class="container">
+    <div class="row">
+        
+        {% for announcement in announcements %}
+        <div class="col-md-12 mb-2">
+            <div class="card shadow h-100 ">
+                <div  class="card-header">
+                    <h4 class="theme">{{announcement.title}} <small style="float: right;">{{announcement.date_announced}}</small></h4>
+                    
+                </div>
+                <div class="card-body">
+                  <p><strong>{{announcement.content}}</strong></p>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock body_block %}
+

@@ -34,9 +34,9 @@ class Dashboard(LoginRequiredMixin, UserPassesTestMixin, views.View):
         subjects = grade.subject_set.all()
 
         announcements = Announcement.objects.filter(
-            Q(announcement_type="Public") | Q(class_name=grade))
+            Q(announcement_type="Public") | Q(class_name=grade)).order_by('-date_announced')[:10]
 
-        print(announcements)
+        
 
         context = {
             'grade': className,
