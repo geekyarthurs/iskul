@@ -10,7 +10,9 @@ class Assignment(models.Model):
     description = models.TextField()
     question_file = models.FileField(
         upload_to="questions",
-        validators=[FileExtensionValidator(allowed_extensions=['zip', 'pdf', 'docx'])])
+        validators=[
+            FileExtensionValidator(allowed_extensions=['zip', 'pdf', 'docx'])
+        ])
     submission_date = models.DateField()
 
     given_by = models.ForeignKey(to='accounts.Teacher',
@@ -20,6 +22,13 @@ class Assignment(models.Model):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        if self.pk:
+            record = Assignment.objects.get(pk=self.pk)
+            if record.question_file != self.question_file:
+                record.question_file.delete(save=False)
+        super().save(*args, **kwargs)
+
 
 class AssignmentSubmission(models.Model):
 
@@ -28,9 +37,13 @@ class AssignmentSubmission(models.Model):
                                    on_delete=models.CASCADE)
     assignment_file = models.FileField(
         upload_to="answers",
-        validators=[FileExtensionValidator(allowed_extensions=['zip', 'pdf', 'docx'])])
+        validators=[
+            FileExtensionValidator(allowed_extensions=['zip', 'pdf', 'docx'])
+        ])
 
     checked = models.BooleanField(null=True, default=False)
     received_grade = models.PositiveIntegerField(default=0, blank=True)
     answered_by = models.ForeignKey(to='accounts.Student',
                                     on_delete=models.CASCADE)
+
+    submission_time = models.DateField(auto_now=True)

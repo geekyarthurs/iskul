@@ -182,3 +182,13 @@ class UpdateAssignmentView(LoginRequiredMixin, UserPassesTestMixin,
         else:
             return render(request, self.template_name,
                           {"form": create_assignment_form})
+
+
+class SubmissionsView(LoginRequiredMixin, UserPassesTestMixin, views.View):
+
+    template_name = "assignment/submitted_assignments.html"
+
+    def get(self, request):
+        submisssions = AssignmentSubmission.objects.filter(
+            assignment__given_by=request.user.teacher)
+        
