@@ -10,6 +10,7 @@ from accounts.models import Student
 
 from django.core.paginator import Paginator
 from .forms import ContentCreateForm
+from announcement.models import Announcement
 
 
 class Dashboard(LoginRequiredMixin, UserPassesTestMixin, views.View):
@@ -28,11 +29,14 @@ class Dashboard(LoginRequiredMixin, UserPassesTestMixin, views.View):
         className = grade.className
 
         subjects = grade.subject_set.all()
+        announcements = Announcement.objects.all()
+        print(announcements)
 
         context = {
             'grade': className,
             'subjects': subjects,
-            'title': 'Dashboard'
+            'title': 'Dashboard',
+            'announcements' : announcements,
         }
 
         return render(request, self.template_url, context)
@@ -50,6 +54,7 @@ class ContentPage(LoginRequiredMixin, UserPassesTestMixin, views.View):
         chapters = Subject.objects.get(
             pk=subject).chapter_set.order_by('chapter_number')
 
+        
         # print(chapters)
 
         if chapter == None:
@@ -72,6 +77,7 @@ class ContentPage(LoginRequiredMixin, UserPassesTestMixin, views.View):
             'chapter_id': chapter,
             'chapter_name': chapter_name,
             'title': chapter_name,
+
         }
         # content =
 
