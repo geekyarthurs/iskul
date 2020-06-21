@@ -12,6 +12,8 @@ from django.core.paginator import Paginator
 from .forms import ContentCreateForm
 from announcement.models import Announcement
 
+from django.db.models import Q
+
 
 class Dashboard(LoginRequiredMixin, UserPassesTestMixin, views.View):
 
@@ -24,19 +26,23 @@ class Dashboard(LoginRequiredMixin, UserPassesTestMixin, views.View):
     def get(self, request):
         if request.user.is_student:
             grade = request.user.student.grades
+
         else:
             grade = request.user.teacher.grades
         className = grade.className
 
         subjects = grade.subject_set.all()
-        announcements = Announcement.objects.all()
+
+        announcements = Announcement.objects.filter(
+            Q(announcement_type="Public") | Q(class_name=grade))
+
         print(announcements)
 
         context = {
             'grade': className,
             'subjects': subjects,
             'title': 'Dashboard',
-            'announcements' : announcements,
+            'announcements': announcements,
         }
 
         return render(request, self.template_url, context)
@@ -54,7 +60,6 @@ class ContentPage(LoginRequiredMixin, UserPassesTestMixin, views.View):
         chapters = Subject.objects.get(
             pk=subject).chapter_set.order_by('chapter_number')
 
-        
         # print(chapters)
 
         if chapter == None:
@@ -77,7 +82,6 @@ class ContentPage(LoginRequiredMixin, UserPassesTestMixin, views.View):
             'chapter_id': chapter,
             'chapter_name': chapter_name,
             'title': chapter_name,
-
         }
         # content =
 
@@ -197,8 +201,7 @@ class UpdateStudent(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class UpdateUser(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
 
-        user_id = int(self.request.path.split
-        ("/")[-1])
+        user_id = int(self.request.path.split("/")[-1])
         login_url = "accounts:login"
         return (self.request.user.pk == user_id)
 

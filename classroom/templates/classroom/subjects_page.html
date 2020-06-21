@@ -53,8 +53,8 @@
                     {% for announcement  in announcements %}
                         <tr>
                             <div class="alert alert-primary" role="alert">
-                             <a href="#"><button class="btn btn-block">{{announcement.title}}</button></a>
-                             <span> {{announcement.date_announced}}</span>
+                             <a href="#" class = "mb-4"><button class="btn btn-block"><marquee Scrollamount=2>{{announcement.title}}</marquee></button></a>
+                             <div class = " mt-3"> {{announcement.date_announced}}</div>
                              </div>
 
                         </tr>
@@ -62,16 +62,7 @@
                 </thead>
                 </table>
                  <hr>
-            <h3 class="mt-3 mb-3"> Class Announcements</h3>
-                <table class="table table-bordered">
-                    <thead>
-                    {% for announcement  in announcements %}
-                        <tr>
-                        <div class="alert alert-primary" role="alert"> announcement hai </div>
-                        </tr>
-                    {%endfor%}
-                </thead>
-                </table>
+           
         </div>
 
         <div class="col p-5 overflow-auto">
