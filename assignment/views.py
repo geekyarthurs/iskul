@@ -109,3 +109,73 @@ def delete_submission(request, submission_id):
     instance.delete()
     return redirect('assignment:student_assignment',
                     assignment_id=assignment_id)
+
+
+@login_required
+def delete_assignment(request, assignment_id):
+    instance = Assignment.objects.get(pk=assignment_id)
+    instance.question_file.delete()
+    instance.delete()
+    return redirect('assignment:home')
+
+
+class CreateAssignmentView(LoginRequiredMixin, UserPassesTestMixin,
+                           views.View):
+
+    template_name = "assignment/create_assignment.html"
+
+    def test_func(self):
+        return self.request.user.is_teacher
+
+    def get(self, request):
+        create_assignment_form = forms.CreateAssignment()
+
+        context = {"form": create_assignment_form}
+
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+
+        create_assignment_form = forms.CreateAssignment(
+            request.POST, request.FILES)
+
+        if create_assignment_form.is_valid():
+            assignment = create_assignment_form.save(commit=False)
+            assignment.given_by = request.user.teacher
+            assignment.save()
+
+            return redirect('assignment:home')
+        else:
+            return render(request, self.template_name,
+                          {"form": create_assignment_form})
+
+
+class UpdateAssignmentView(LoginRequiredMixin, UserPassesTestMixin,
+                           views.View):
+
+    template_name = "assignment/update_assignment.html"
+
+    def test_func(self):
+        return self.request.user.is_teacher
+
+    def get(self, request, assignment_id):
+        assignment = Assignment.objects.get(pk=assignment_id)
+        create_assignment_form = forms.UpdateAssignment(instance=assignment)
+
+        context = {"form": create_assignment_form}
+
+        return render(request, self.template_name, context)
+
+    def post(self, request, assignment_id):
+
+        create_assignment_form = forms.UpdateAssignment(request.POST, request.FILES)
+
+        if create_assignment_form.is_valid():
+            assignment = create_assignment_form.save(commit=False)
+            assignment.given_by = request.user.teacher
+            assignment.save()
+
+            return redirect('assignment:home')
+        else:
+            return render(request, self.template_name,
+                          {"form": create_assignment_form})

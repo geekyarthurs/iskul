@@ -1,0 +1,32 @@
+{% extends 'assignment/base.html' %}
+
+
+{% block body_block %}
+{% load crispy_forms_tags %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+
+
+    <div class="card card-body">
+
+    <h3>Update Assignment</h3>
+    <hr>
+
+        <form action="" method="post" enctype="multipart/form-data">
+            {{form|crispy}}
+            {% csrf_token %}
+            <input type="submit" value="Submit" class = "btn btn-primary">
+        </form>
+
+    </div>
+
+
+</div>
+
+{% endblock body_block %}

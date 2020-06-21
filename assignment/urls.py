@@ -23,5 +23,20 @@ urlpatterns = [
         'teacher/home',
         views.TeacherHome.as_view(),
         name='teacher_home',
+    ),
+    path(
+        'teacher/create',
+        views.CreateAssignmentView.as_view(),
+        name='create_assignment',
+    ),
+    path(
+        'teacher/delete/<int:assignment_id>',
+        views.delete_assignment,
+        name='delete_assignment',
+    ),
+    path(
+        'teacher/update/<int:assignment_id>',
+        views.UpdateAssignmentView.as_view(),
+        name='update_assignment',
     )
 ]
