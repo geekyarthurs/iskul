@@ -167,8 +167,11 @@ class UpdateAssignmentView(LoginRequiredMixin, UserPassesTestMixin,
         return render(request, self.template_name, context)
 
     def post(self, request, assignment_id):
+        assignment = Assignment.objects.get(pk=assignment_id)
 
-        create_assignment_form = forms.UpdateAssignment(request.POST, request.FILES)
+        create_assignment_form = forms.UpdateAssignment(request.POST,
+                                                        request.FILES,
+                                                        instance=assignment)
 
         if create_assignment_form.is_valid():
             assignment = create_assignment_form.save(commit=False)
