@@ -32,4 +32,4 @@ class Admission(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return str(self.student_name) + " " + str(self.student_roll)
+        return str(self.student_name)

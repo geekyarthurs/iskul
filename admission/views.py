@@ -18,8 +18,8 @@ class Admit(views.View):
 
     def post(self, request):
 
-        AdmitForm = forms.AdmissionForm(request.POST)
-    
+        AdmitForm = forms.AdmissionForm(request.POST, request.FILES)
+
         if AdmitForm.is_valid():
             new_student = AdmitForm.save()
             new_student.save()
