@@ -188,7 +188,45 @@ class SubmissionsView(LoginRequiredMixin, UserPassesTestMixin, views.View):
 
     template_name = "assignment/submitted_assignments.html"
 
-    def get(self, request):
-        submisssions = AssignmentSubmission.objects.filter(
-            assignment__given_by=request.user.teacher)
-        
+    def test_func(self):
+        return self.request.user.is_teacher
+
+    def get(self, request, assignment_id):
+
+        assignment_title = Assignment.objects.get(pk=assignment_id).title
+
+        submissions = AssignmentSubmission.objects.filter(
+            assignment_id=assignment_id)
+
+        context = {
+            "submissions": submissions,
+            "title": assignment_title,
+        }
+
+        return render(request, self.template_name, context)
+
+
+class CheckAssignmentView(LoginRequiredMixin, UserPassesTestMixin, views.View):
+    def test_func(self):
+        return self.request.user.is_teacher
+
+    template_name = "assignment/check_page.html"
+
+    def get(self, request, submission_id):
+        instance = AssignmentSubmission.objects.get(pk=submission_id)
+
+        form = forms.CheckAssignment(instance=instance)
+
+        context = {"form": form}
+        return render(request, self.template_name, context)
+
+    def post(self, request, submission_id):
+        instance = AssignmentSubmission.objects.get(pk=submission_id)
+        form = forms.CheckAssignment(request.POST, instance=instance)
+        assignment_id = instance.assignment_id
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect("assignment:view_submissions",
+                            assignment_id=assignment_id)
+        else:
+            return render(request, self.template_name, {"form": form})

@@ -1,0 +1,52 @@
+{% extends 'assignment/base.html' %}
+
+{% block body_block %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container mt-5">
+
+    <h3>Submissions | {{title}}</h3>
+    <hr>
+    <table class="table table-hover" style="color:#262626;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Submission Time</th>
+                <th>Given Grade</th>
+                <th>Status</th>
+                <th>Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for submission in submissions %}
+            <tr>
+                <td>{{submission.answered_by.user.first_name}} {{submission.answered_by.user.last_name}}</td>
+                <td>{{submission.submission_time}}</td>
+                <td>{{submission.received_grade}}</td>
+                <td>{% if submission.checked%}Checked{% else %}Not Checked{% endif %}</td>
+                <td>
+                <a href="{{submission.assignment_file.url}}" class="btn btn-success">Download</a>
+                    <a href="{% url 'assignment:check_assignment' submission_id=submission.pk %}" class="btn btn-primary">
+                        {% if submission.checked %}
+                        Re-Grade
+                        {% else %}
+                        Grade
+                        {% endif %}
+
+                    </a>
+
+                    
+
+                </td>
+                {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock body_block %}

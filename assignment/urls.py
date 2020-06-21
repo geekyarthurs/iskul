@@ -38,5 +38,15 @@ urlpatterns = [
         'teacher/update/<int:assignment_id>',
         views.UpdateAssignmentView.as_view(),
         name='update_assignment',
+    ),
+    path(
+        'teacher/submissions/<int:assignment_id>',
+        views.SubmissionsView.as_view(),
+        name='view_submissions',
+    ),
+    path(
+        'teacher/check_assignment/<int:submission_id>',
+        views.CheckAssignmentView.as_view(),
+        name='check_assignment',
     )
 ]

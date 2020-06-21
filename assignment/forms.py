@@ -18,3 +18,9 @@ class UpdateAssignment(forms.ModelForm):
     class Meta:
         model = Assignment
         fields = ['title', 'description', 'question_file', 'submission_date']
+
+
+class CheckAssignment(forms.ModelForm):
+    class Meta:
+        model = AssignmentSubmission
+        fields = ('received_grade', )

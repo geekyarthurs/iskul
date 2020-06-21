@@ -41,7 +41,7 @@ ISKUL | Assignments
 
                 <td> <a href="{% url 'assignment:update_assignment' assignment_id=assignment.pk%}" class="btn btn-secondary">Update</a>
                     <a href="{% url 'assignment:delete_assignment' assignment_id=assignment.pk %}" class="btn btn-danger">Delete</a>
-                    <a href="" class="btn btn-primary">View</a> </td>
+                    <a href="{% url 'assignment:view_submissions' assignment_id=assignment.pk %}" class="btn btn-primary">View</a> </td>
             </tr>
             {% endfor %}
         </tbody>
