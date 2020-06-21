@@ -5,6 +5,30 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from . import forms
+from django.http import HttpResponse
+from django.db.models import Count
+from accounts.models import Student
+
+
+class TeacherHome(LoginRequiredMixin, UserPassesTestMixin, views.View):
+    def test_func(self):
+        return self.request.user.is_teacher
+
+    def get(self, request):
+        teacher_grade = request.user.teacher.grades
+        assignments = Assignment.objects.filter(
+            given_by__grades=teacher_grade).prefetch_related(
+                'given_by').order_by('given_at').annotate(
+                    total_submission=Count('submissions'))
+
+        student_count = Student.objects.filter(grades=teacher_grade).count()
+
+        context = {
+            "assignments": assignments,
+            "student_count": student_count,
+        }
+
+        return render(request, "assignment/teacher_index.html", context)
 
 
 class Home(LoginRequiredMixin, UserPassesTestMixin, views.View):
@@ -15,7 +39,7 @@ class Home(LoginRequiredMixin, UserPassesTestMixin, views.View):
         if request.user.is_student:
             user_grade = request.user.student.grades
         else:
-            user_grade = request.user.teacher.grades
+            return redirect('assignment:teacher_home')
         assignments = Assignment.objects.filter(
             given_by__grades=user_grade).prefetch_related('given_by').order_by(
                 'given_at')

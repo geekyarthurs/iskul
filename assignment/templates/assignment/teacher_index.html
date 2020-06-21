@@ -1,0 +1,51 @@
+{% extends 'assignment/base.html' %}
+
+{% block title %}
+ISKUL | Assignments
+{% endblock title %}
+{% block body_block %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container mt-5">
+
+<h2 class="text-center mb-5" >Assignments</h2>
+<hr>
+<a href="" class="btn btn-primary">Add Assignment</a>
+
+<h5 class = "my-3 ">Total Student : {{student_count}}</h5>
+
+<table class="table table-hover" style="color:#262626;">
+    <thead>
+      <tr>
+        <th>Assignment Name</th>
+        <th>Submission Date</th>
+        <th>Given At</th>
+        <th>Submitted By</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for assignment in assignments %}
+      <tr>
+        <td>{{assignment.title}}</td>
+        <td>{{assignment.submission_date}}</td>
+        <td>{{assignment.given_at}}</td>
+        <td>{{assignment.total_submission}}</td>
+
+        <td> <a href="" class="btn btn-secondary">Update</a>
+        <a href="" class="btn btn-danger">Delete</a>
+        <a href="" class="btn btn-primary">View</a> </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+
+{% endblock body_block %}
