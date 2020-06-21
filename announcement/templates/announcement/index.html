@@ -13,7 +13,7 @@ ISKUL | Announcements
 <div  style="color:#384158" class="container">
     <div class="row">
         
-        {% for announcement in announcements %}
+        {% for announcement in announcements.object_list %}
         <div class="col-md-12 mb-2">
             <div class="card shadow h-100 ">
                 <div  class="card-header">
@@ -29,5 +29,43 @@ ISKUL | Announcements
         {% endfor %}
     </div>
 </div>
+<br>
+{% if announcements.has_other_pages %}
+  <ul class="pagination justify-content-center">
+    {% if announcements.has_previous %}
+      <li class="page-item"><a class="page-link" tabindex="-1" href="?page={{ announcements.previous_page_number }}">Previous</a></li>
+    {% else %}
+      <li class="page-item page-link disabled"><span>Previous</span></li>
+    {% endif %}
+    {% for i in announcements.paginator.page_range %}
+      {% if announcements.number == i %}
+        <li class="page-link active-pg"><span>{{ i }} <span class="sr-only active">(current)</span></span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link"href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if announcements.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ announcements.next_page_number }}">Next</a></li>
+    {% else %}
+      <li class="page-item page-link disabled"><span>Next</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+<br><br><br>
+
 {% endblock body_block %}
+
+<nav aria-label="Page navigation example">
+  
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
 

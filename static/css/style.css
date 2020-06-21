@@ -17,3 +17,8 @@
 .shadow {
     box-shadow:0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important
    }
+
+.active-pg{
+    background-color: #14bdee;
+    color: #384158;
+}
