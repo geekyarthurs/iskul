@@ -11,24 +11,33 @@
 <br>
 <br>
 <div class="container">
-
-
-    <div class="card card-body">
-
-    <h3>Create Assignment</h3>
-    <hr>
-
-        <form action="" method="post" enctype="multipart/form-data">
-            {{form|crispy}}
-            {% csrf_token %}
-            <input type="submit" value="Submit" class = "btn btn-primary">
-        </form>
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Create new Assignment
+                      </h6>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {{form|crispy}}
+                        {% csrf_token %}
+                        <input type="submit" value="Submit" class = "btn btn-primary">
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 
 <script>
+    CKEDITOR.replace( 'id_description' );
 document.getElementById('id_submission_date').setAttribute("type", "date")
 </script>
 </div>
 
 {% endblock body_block %}
+

@@ -11,7 +11,7 @@ class Assignment(models.Model):
     question_file = models.FileField(
         upload_to="questions",
         validators=[
-            FileExtensionValidator(allowed_extensions=['zip', 'pdf', 'docx'])
+            FileExtensionValidator(allowed_extensions=['zip', 'pdf', 'docx', 'jpg'])
         ])
     submission_date = models.DateField()
 

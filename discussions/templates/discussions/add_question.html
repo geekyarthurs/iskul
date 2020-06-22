@@ -1,6 +1,6 @@
 {% extends 'classroom/base.html' %} 
 {% block body_block %}
-<br><br><br><br><br>
+<br><br><br><br><br><br>
 <div class="container">
 <div class="row">
   <div class="col-md-12">
@@ -9,6 +9,7 @@
         <h6 class="m-0 font-weight-bold text-primary">
             Add new question to Discussion
           </h6>
+          </div>
           <div class="card-body">
             <form method="POST">
               {% csrf_token %}
