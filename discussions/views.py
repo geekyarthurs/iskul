@@ -24,8 +24,13 @@ class Home(LoginRequiredMixin, views.View):
         questions = Question.objects.order_by('-posted_at').filter(
             subject_id__in=user_subjects,
             question_title__icontains=search_query)
+        
 
-        paginator = Paginator(questions, 5)
+        if "search_query" in request.GET:
+            paginator = Paginator(questions,1000)
+        
+        else:
+            paginator = Paginator(questions, 5)
 
         page = request.GET.get("page", "1")
         page = int(page)
