@@ -4,6 +4,8 @@
 
 {% block body_block %}
 
+
+
 <div class="card-body" style="margin-top:100px;">
     <div class="row">
 
@@ -30,13 +32,38 @@
 
 
                     {% if user.is_teacher and user.teacher.subject.pk == subject_id  %}
-                    <a href="{% url 'classroom:chapter_delete' chapter_id=chapter.pk %}"><i
+                    <a data-toggle="modal" data-target="#{{chapter.id}}"><i
                             class="fas fa-2x text-danger fa-trash float-right"></i></a>
                     {% endif %}
 
                 </li>
 
+                    <!-- Button trigger modal -->
+                    {% comment %} <button type="button" class="btn btn-primary" >
+                    Launch demo modal
+                    </button> {% endcomment %}
 
+                    <!-- Modal -->
+                    <div class="modal fade" id="{{chapter.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h4>Do you really want to delete chapter "{{chapter.chapter_title}}"?</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <a  href="{% url 'classroom:chapter_delete' chapter_id=chapter.pk %}"> 
+                            <button type="button" class="btn btn-danger">Delete</button> </a>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
 
                 {% endfor %}
             </ul>
