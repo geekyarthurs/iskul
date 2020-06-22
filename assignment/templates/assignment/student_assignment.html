@@ -32,7 +32,11 @@
 
                 <h3 class="card-title">{{assignments.title}}</h3>
                 <hr>
-                <p class="lead">{{assignments.description}}</p>
+                <p class="lead">
+             {% autoescape on %}
+                {{assignments.description | safe}}
+                {% endautoescape %}
+                </p>
                 <hr>
                 <p>
 

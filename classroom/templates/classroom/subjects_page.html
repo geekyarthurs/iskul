@@ -47,18 +47,21 @@
             </ul>
 
             <hr>
-            <h3 class="mt-3 mb-3">Announcements</h3>
-                <table class="table table-bordered">
-                    <thead>
+            
+                
+                    <a href="/announcement/"  class="list-group-item list-group-item-action ">
+                                    <h3 style="color:#14bdee;" class="mt-3 mb-3">Announcements</h3>
+                                </a>
                     {% for announcement  in announcements %}
-                        <tr>
-                            <div class="alert alert-primary" role="alert">
-                             <a href="#" class = "mb-4"><button data-toggle="modal" data-target="#{{announcement.id}}" class="btn btn-block"><marquee Scrollamount=2>{{announcement.title}}</marquee></button></a>
-                             <div class = " mt-3"> {{announcement.date_announced}}</div>
-                             </div> 
+                       
+                          
 
-
-                             
+                             <div class="list-group">
+                               
+                                <a href="#" class="list-group-item list-group-item-action mt-1">
+                                <h5 style="text-transform: uppercase;" data-toggle="modal" data-target="#{{announcement.id}}" >{{announcement.title}}</h5>
+                                </a>
+                                </div>
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="{{announcement.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -74,16 +77,15 @@
                                         {{announcement.content}}
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" style="background-color:#14bdee;" class="btn" data-dismiss="modal">Close</button>
                                     </div>
                                     </div>
                                 </div>
                                 </div>
 
-                        </tr>
+                        
                     {%endfor%}
-                </thead>
-                </table>
+              
                  <hr>
            
         </div>

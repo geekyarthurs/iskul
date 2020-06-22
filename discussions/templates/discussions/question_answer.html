@@ -1,49 +1,61 @@
 {% extends 'classroom/base.html' %}
 {% block body_block %}
 
-<div class="container" style="margin-top:200px;">
-  <div class="card card-body mt-5">
-    <h3 class="card-title">
-      {{question.question_title}}
+<br><br><br><br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow mt-4 mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">
+              {{question.question_title}}
+              <span class="float-right">{{question.subject.course_name}}</span>
+            </h6>
+        </div>
+        <div class="card-body">
+            <h6 class="font-weight-normal m-0">
+              {% autoescape off %}
+              {{question.question_content}}
 
-      <span class="float-right">{{question.subject.course_name}}</span>
-    </h3>
-
-    <hr />
-    {% autoescape off %}
-    {{question.question_content}}
-
-    {% endautoescape %}
-
-    
-    <hr />
-
-    <div>
-      Asked By : {{question.posted_by.first_name}} {{question.posted_by.last_name}} - {{question.posted_at}}
-
-      <div class="float-right"></div>
+              {% endautoescape %}
+            </h6>
+            <hr>
+            <p>
+                <strong>Asked By : {{question.posted_by.first_name}} {{question.posted_by.last_name}}  - {{question.posted_at}}</strong>
+                
+            </p>
+        </div>
+    </div>
     </div>
   </div>
+</div>
 
+<div class="container">
   <h2 class="text-center mb-3">Answers</h2>
-
   <a href="{% url 'discussions:answer' pk=question.pk %}" class="btn btn-primary">Answer</a>
+  <div class="col-md-12">
+    <div class="card shadow mt-4 mb-4">
+      <div class="col-md-12">
+        {% for answer in question.answer_set.all %}
 
-  {% for answer in question.answer_set.all %}
+        <div class="card-title mt-2">
+          <h5>{{answer.posted_by.first_name}} {{answer.posted_by.last_name}} {% if answer.posted_by.is_student %} (Student) {% else %} (Teacher) {% endif %} </h5>
+        </div>
 
-  <div class="card my-3">
-    <div class="card-body">
-      <h5>{{answer.posted_by.first_name}} {{answer.posted_by.last_name}} {% if answer.posted_by.is_student %} (Student) {% else %} (Teacher) {% endif %} </h5>
-      <hr />
-        {% autoescape on %}
+        <div class="card-body">
+          {% autoescape on %}
         
         {{answer.answer|safe}}
         
         {% endautoescape %}
-      
+        </div>
+        <hr>
+
+        {% endfor%}
+      </div>
     </div>
   </div>
 
-  {% endfor %}
+  
 </div>
 {% endblock body_block %}
