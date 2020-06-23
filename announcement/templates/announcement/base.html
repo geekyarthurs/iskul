@@ -121,10 +121,41 @@
 			</div>
 			<nav class="menu_nav">
 				<ul class="menu_mm">
-					<li class="menu_mm"><a href="/">Home</a></li>
-
+					<hr>
+					
+					<li class="menu_mm">
+					<a href="/home/">
+					<div class="logo_text">IS<span>KUL</span></div>
+					</a></li>
+					<hr>
 					<li class="menu_mm"><a href="/classroom/">Classroom</a></li>
-					<li class="menu_mm"><a href="#">Register</a></li>
+					<li class="menu_mm"><a href="{%url 'discussions:home'%}">Discussion</a></li>
+					<li class="menu_mm"><a href="{{assignment}}">Assignment</a></li>
+					{% if user.is_teacher %}
+					<li class="menu_mm">
+						<a href="{% url 'classroom:student_manage'  %}">Students</a></li>
+					{% endif %}
+					<li class="menu_mm"><a href=""></a></li>
+					<li class="menu_mm"><a href="{% url 'accounts:signout' %}">Logout</a></li>
+					<li class="nav-item dropdown">
+						<a class="nav-link " href="#" id="navbarDropdown" data-toggle="dropdown"
+							aria-expanded="false">
+							<i class="fas fa-user"></i> Profile
+						</a>
+
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">{{user.first_name}}
+								{{user.last_name}}</a>
+
+							<div class="dropdown-divider"></div>
+
+							<a class="dropdown-item"
+								href="{% url 'classroom:update_user' pk=user.pk%}">Update
+								Profile</a>
+
+							<a class="dropdown-item" href="{% url 'accounts:signout' %}">Logout</a>
+						</div>
+					</li>
 				</ul>
 			</nav>
 		</div>

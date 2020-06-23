@@ -97,20 +97,43 @@
 
 	<div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
 		<div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
-		<div class="search">
-			<form action="#" class="header_search_form menu_mm">
-				<input type="search" class="search_input menu_mm" placeholder="Search" required="required">
-				<button class="header_search_button d-flex flex-column align-items-center justify-content-center menu_mm">
-					<i class="fa fa-search menu_mm" aria-hidden="true"></i>
-				</button>
-			</form>
-		</div>
+		
 		<nav class="menu_nav">
 			<ul class="menu_mm">
-				<li class="menu_mm"><a href="/home/">Home</a></li>
-			
+			 <hr>
+				<li class="menu_mm">
+				<div class="logo_text">IS<span>KUL</span></div>
+				</li>
+			<hr>
 				<li class="menu_mm"><a href="/classroom/">Classroom</a></li>
-				<li class="menu_mm"><a href="#">Register</a></li>
+				
+				<li class="menu_mm nav-item dropdown">
+						<a class="nav-link " href="#" id="navbarDropdown" data-toggle="dropdown"
+							aria-expanded="false">
+							<i class=""></i> Profile
+						</a>
+						
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							{% if user.is_authenticated %}
+							<a class="dropdown-item" href="#">{{user.first_name}}
+								{{user.last_name}}</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item"
+								href="{% url 'classroom:update_user' pk=user.pk%}">Update
+								Profile</a>
+								<a class="dropdown-item" href="{% url 'accounts:signout' %}">Logout</a>
+						{% else %}
+						<a class="dropdown-item" href="/login">Login</a>
+						
+						{% endif %}
+							
+
+							
+							
+
+							
+						</div>
+					</li>
 			</ul>
 		</nav>
 	</div>
