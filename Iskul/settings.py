@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'assignment',
     'announcement',
     
+    
 ]
 
 MIDDLEWARE = [

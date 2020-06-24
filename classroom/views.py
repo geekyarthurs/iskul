@@ -11,8 +11,12 @@ from accounts.models import Student
 from django.core.paginator import Paginator
 from .forms import ContentCreateForm
 from announcement.models import Announcement
+from discussions.models import Question , Subject as sub
+from assignment.models import Assignment
 
 from django.db.models import Q
+
+
 
 
 class Dashboard(LoginRequiredMixin, UserPassesTestMixin, views.View):
@@ -32,17 +36,42 @@ class Dashboard(LoginRequiredMixin, UserPassesTestMixin, views.View):
         className = grade.className
 
         subjects = grade.subject_set.all()
+        subjects_count = grade.subject_set.all().count()
+        
+        # Question count for duscussion
+        if request.user.is_student:
+            user_subjects = request.user.student.grades.subject_set.values_list(
+                'id', flat=True)
 
+        elif request.user.is_teacher:
+            user_subjects = [request.user.teacher.subject_id]
+
+        questions = Question.objects.filter(subject_id__in=user_subjects).count()
+        
+
+        # Students count in grade 
+        student_count = Student.objects.filter(grades=grade).count()
+        if request.user.is_student:
+            count_state = 'You have ' + str(student_count) + ' friends '
+        elif request.user.is_teacher:
+            count_state = 'You have ' + str(student_count) + ' students'
+
+        # Announcement Count
         announcements = Announcement.objects.filter(
             Q(announcement_type="Public") | Q(class_name=grade)).order_by('-date_announced')[:10]
 
-        
-
+     
         context = {
             'grade': className,
             'subjects': subjects,
             'title': 'Dashboard',
             'announcements': announcements,
+            'subjects_count' : subjects_count,
+            'questions' : questions,
+            'count_state' : count_state,
+
+            
+            
         }
 
         return render(request, self.template_url, context)
@@ -216,3 +245,5 @@ class UpdateUser(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         'mobile_number',
         'location',
     )
+
+
