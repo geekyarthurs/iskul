@@ -22,3 +22,18 @@
     background-color: #14bdee;
     color: #384158;
 }
+.border-left-primary {
+    border-left:.5rem solid #14bdee !important
+   }
+   .border-left-secondary {
+    border-left:.5rem solid #858796!important
+   }
+   .border-left-success {
+    border-left:.5rem solid #1cc88a!important
+   }
+   .border-left-danger{
+    border-left:.5rem solid red!important
+   }
+   .text-primary{
+       color: #14bdee;
+   }

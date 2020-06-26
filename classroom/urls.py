@@ -38,5 +38,6 @@ urlpatterns = [
          name='update_student'),
     path('update_user/<int:pk>',
          views.UpdateUser.as_view(),
-         name='update_user')
+         name='update_user'),
+   
 ]
