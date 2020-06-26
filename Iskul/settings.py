@@ -24,7 +24,7 @@ SECRET_KEY = '(rm1s&p#i0a&k3)35jv!x&yjx^gq$ns!4ifc2c=kdevwom-10j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'home',
     'assignment',
     'announcement',
-    
 ]
 
 MIDDLEWARE = [

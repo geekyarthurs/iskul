@@ -225,7 +225,9 @@ class CheckAssignmentView(LoginRequiredMixin, UserPassesTestMixin, views.View):
         form = forms.CheckAssignment(request.POST, instance=instance)
         assignment_id = instance.assignment_id
         if form.is_valid():
-            form.save(commit=True)
+            checked = form.save(commit=False)
+            checked.checked = True
+            checked.save()
             return redirect("assignment:view_submissions",
                             assignment_id=assignment_id)
         else:
