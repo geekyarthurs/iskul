@@ -1,0 +1,62 @@
+{% extends 'classroom/base.html' %}
+
+
+{% block body_block %}
+
+<br><br><br><br><br><br><br>
+<title>ISKUL| External Contents</title>
+
+
+<div  style="color:#384158" class="container">
+    <div class="row">
+        
+        {% for content in contents %}
+        <div class="col-md-12 mb-2">
+            <div class="card shadow h-100 ">
+                <div  class="card-header">
+                
+                    <h4 class="theme">
+                    <a href="/external_contents/{{content.slug}}">
+                    {{content.name}} 
+                    </a>
+                    <small style="float: right;">{{content.category}}</small></h4>              
+                </div>
+                <div class="card-body">
+                  <p><strong>
+                  {% autoescape on %}
+                  {{content.description|safe|truncatewords:"20"}}
+                  {% endautoescape %}
+                  </strong></p>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+<br>
+{% if contents.has_other_pages %}
+  <ul class="pagination justify-content-center">
+    {% if contents.has_previous %}
+      <li class="page-item"><a class="page-link" tabindex="-1" href="?page={{ contents.previous_page_number }}">Previous</a></li>
+    {% else %}
+      <li class="page-item page-link disabled"><span>Previous</span></li>
+    {% endif %}
+    {% for i in contents.paginator.page_range %}
+      {% if contents.number == i %}
+        <li class="page-link active-pg"><span>{{ i }} <span class="sr-only active">(current)</span></span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link"href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if contents.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ contents.next_page_number }}">Next</a></li>
+    {% else %}
+      <li class="page-item page-link disabled"><span>Next</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+<br><br><br>
+
+{% endblock body_block %}
+

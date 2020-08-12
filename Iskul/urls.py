@@ -20,6 +20,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('tinymce', include('tinymce.urls')),
     path('', include('accounts.urls')),
     path('classroom/', include('classroom.urls')),
     path('discussion/', include('discussions.urls')),
@@ -27,6 +28,7 @@ urlpatterns = [
     path('home/', include('home.urls')),
     path('assignment/', include('assignment.urls')),
     path('announcement/', include('announcement.urls')),
+    path('', include('external_contents.urls'))
    
    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

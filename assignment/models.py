@@ -21,7 +21,7 @@ class Assignment(models.Model):
 
     def __str__(self):
         return self.title
-
+        
     def save(self, *args, **kwargs):
         if self.pk:
             record = Assignment.objects.get(pk=self.pk)

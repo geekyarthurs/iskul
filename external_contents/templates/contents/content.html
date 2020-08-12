@@ -1,0 +1,62 @@
+{% extends 'classroom/base.html' %}
+{% block body_block %}
+<br><br><br><br><br>
+
+<div class="container">
+  <div class="row">
+    <!--contents side bar-->
+    <div class="col-md-3">
+      <a href="/external_contents/"  class="list-group-item list-group-item-action ">
+        <h3 style="color:#14bdee;" class="mt-3 mb-3">External Contents</h3>
+    </a>
+    {% for c in contents %}
+             <div class="list-group">
+            <a href="/external_contents/{{c.slug}}" class="list-group-item list-group-item-action mt-1">
+            
+            <h5>{{c.name}}
+                <small style="float: right;">{{c.category}}</small>
+            </h5>
+            </a>
+            </div>
+            {% endfor %}
+    </div>
+    <!--contents side bar-->
+    <div class="col-md-8">
+      <div class="col-md-12 mb-2">
+        <div class="card shadow h-100 ">
+            <div  class="card-header">
+                <h4 class="theme">{{content.name}} </h4>
+                
+            </div>
+            <div class="card-body">
+              <p>
+              <h5> Category: {{content.category}}
+                <small style="float: right;">Posted-on: {{content.posted_on}}</small>
+              </h5>
+              </p>
+              <p>
+                {% autoescape on %}
+                {{content.description|safe}}
+                {% endautoescape %}
+
+              </p>
+              <br>
+              {% if files %}
+              <h3>Files:</h3>
+              <br>
+              
+              {% for file in files %}
+              <h4>{{forloop.counter}}. &nbsp;
+              <button class="btn "><a download href="{{file.file}}" >{{file.file.name}}</a></button>
+              </h4>
+              <br><br>
+              {% endfor %}
+              {% endif %}
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body_block %}

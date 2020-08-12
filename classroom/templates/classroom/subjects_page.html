@@ -28,19 +28,14 @@
                 </thead>
                 </table>
         
-            <h3>External Contents</h3>
-            <hr>
-            <ul class="list-group">
-                <li class="list-group-item">Coming Soon</li>
-            </ul>
-            <hr>
+            
         
         </div> <!--Sidebar left -->
 
        
 
-        <div class="col-md-6 p-5 overflow-auto">
-            <h1>Iskul for All ! </h1>
+        <div class="col-md-8 p-5 overflow-auto">
+            <h1>Iskul for All !</h1>
             <hr>
         
                         <div class=" col-md-12 mb-4">
@@ -93,9 +88,15 @@
                 
                     </div> <!--Content cards wala-->
         
-        <!--Sidebar right-->
+        
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        
+        <!--announcements-->
         <div class="col-md-3">
-            <br><br>
+            
             <a href="/announcement/"  class="list-group-item list-group-item-action ">
                 <h3 style="color:#14bdee;" class="mt-3 mb-3">Announcements</h3>
             </a>
@@ -103,12 +104,12 @@
    
       
 
-         <div class="list-group">
+        <div class="list-group">
            
             <a href="#" class="list-group-item list-group-item-action mt-1">
             <h5 style="text-transform: uppercase;" data-toggle="modal" data-target="#{{announcement.id}}" >{{announcement.title}}</h5>
             </a>
-            </div>
+        </div>
 
             <!-- Modal -->
             <div class="modal fade" id="{{announcement.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -135,8 +136,23 @@
 
 <hr>
         </div>
+        <div class="col-md-8">
+            <a href="/external_contents/"  class="list-group-item list-group-item-action ">
+                <h3 style="color:#14bdee;" class="mt-3 mb-3">External Contents</h3>
+            </a>
+        
+            {% for content in external_content %}
+             <div class="list-group">
+            <a href="/external_contents/{{content.slug}}" class="list-group-item list-group-item-action mt-1">
+            <h5>{{content.name}}
+                <small style="float: right;">{{content.category}}</small>
+            </h5>
+            </a>
+            </div>
+            {% endfor %}
+            
+        </div>
     </div>
 </div>
-  
 
 {% endblock body_block %}

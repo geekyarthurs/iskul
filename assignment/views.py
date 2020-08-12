@@ -78,7 +78,6 @@ class AssignmentViewStudent(LoginRequiredMixin, UserPassesTestMixin,
     def post(self, request, assignment_id):
 
         answered_by = request.user.student
-        assignment = Assignment.objects.get(pk=assignment_id)
 
         form = forms.AddSubmission(request.POST, request.FILES)
         print(request.FILES)

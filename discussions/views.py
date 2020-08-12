@@ -27,7 +27,7 @@ class Home(LoginRequiredMixin, views.View):
         
 
         if "search_query" in request.GET:
-            paginator = Paginator(questions,1000)
+            paginator = Paginator(questions,5)
         
         else:
             paginator = Paginator(questions, 5)

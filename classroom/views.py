@@ -13,7 +13,7 @@ from .forms import ContentCreateForm
 from announcement.models import Announcement
 from discussions.models import Question , Subject as sub
 from assignment.models import Assignment
-
+from external_contents.models import Content  
 from django.db.models import Q
 
 
@@ -37,7 +37,7 @@ class Dashboard(LoginRequiredMixin, UserPassesTestMixin, views.View):
 
         subjects = grade.subject_set.all()
         subjects_count = grade.subject_set.all().count()
-        
+        external_contents = Content.objects.all()[:4]
         # Question count for duscussion
         if request.user.is_student:
             user_subjects = request.user.student.grades.subject_set.values_list(
@@ -70,7 +70,7 @@ class Dashboard(LoginRequiredMixin, UserPassesTestMixin, views.View):
             'questions' : questions,
             'count_state' : count_state,
 
-            
+            'external_content':external_contents,
             
         }
 
